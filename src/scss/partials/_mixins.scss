@@ -1,0 +1,44 @@
+@mixin color($background-color, $color: null){
+    background-color: $background-color;
+    @if $color != null{
+        color: $color
+    }
+    @else{
+        color: if(lightness($color: $background-color) < 50%, white, auto);
+    } 
+}
+
+@mixin screen($breakpoint) {
+    @media screen and (min-width: map-get($breakpoints, $breakpoint)){
+        @content;
+    }
+}
+
+@mixin link-style($color: $color-base, $hover-decoration: underline, $display: inline){
+    text-decoration-line: none;
+    color: $color;
+    display: $display;
+    &:hover{
+        text-decoration-line: $hover-decoration;
+    }
+}
+
+@function get-hover-background-color($color, $background-color){
+    $hover-bg-color : $background-color;
+        //if very light background
+        @if lightness($background-color) > 100%-$color-step{
+            $hover-bg-color: darken($background-color, $color-step)
+        } 
+        //if very dark background
+        @else if lightness($background-color) < $color-step {
+            $hover-bg-color: lighten($background-color, $color-step)
+        } 
+        //if not extreme background, choose with text color
+        @else{
+            $hover-bg-color: if(lightness($color) > 50%, 
+                                darken($background-color, $color-step), 
+                                lighten($background-color, $color-step))
+        }
+        @return $hover-bg-color
+}
+

@@ -1,0 +1,23 @@
+@mixin breadcrumbs ($separator) {
+    ul, ol {
+        list-style-type: none;
+
+        .crumb {
+            display: inline-block;
+
+            a::afer {
+                display: inline-block;
+                content: $separator;
+                font-size: 80%;
+                font-weight: bold;
+                padding: 0 0.2em;
+            }
+        }
+    }
+}
+
+.breadcrumbs {
+    @include breadcrumbs($separator: '>') {
+        border-bottom: 1px solid $color-base-darker;
+    }
+}

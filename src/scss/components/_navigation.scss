@@ -1,0 +1,76 @@
+@mixin nav() {
+    display: flex;
+    align-items: stretch;
+
+    a{
+        @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
+    }
+}
+
+@mixin top-nav() {
+    flex-direction: row;
+}
+
+@mixin side-nav() {
+    @include side-nav--visible(true);
+    flex-direction: column;
+    margin: 2em 0;
+
+    @include screen(medium){
+        @include side-nav--visible(false);
+    }
+}
+
+@mixin side-nav--visible($is-visible) {
+    @if $is-visible {
+        position: fixed;
+
+        &.side-nav-hidden {
+            left: -100%;
+        }
+        
+        &.side-nav--visible {
+            left: 0;
+        }
+    }
+    @else {
+        position: static;
+    }
+}
+
+@mixin navbar-item($background-color, $color) {
+    margin: 0;
+    padding: 0.5em 1em;
+    &:hover{
+        transition: background-color 300ms 0s ease;
+        @include color($background-color: get-hover-background-color($color, $background-color));
+    }
+}
+
+.nav {
+    @include nav();
+    font-size: large;
+}
+
+.top-nav {
+    @include top-nav();
+    font-weight: bold;
+}
+
+.top-nav__item {
+    @include navbar-item($background-color: $color-base, $color: white);
+}
+
+.side-nav {
+    @include side-nav();
+    background-color: white;
+    text-align: center;
+
+    @include screen(medium) {
+        min-width: 20%;
+    }
+}
+
+.side-nav__item {
+    @include navbar-item($background-color: white, $color: black);
+}

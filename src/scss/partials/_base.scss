@@ -1,0 +1,10 @@
+$color-base: hsl(280, 100%, 30%);
+$color-base-lighter: lighten($color-base, 10%);
+$color-base-darker: darken($color-base, 10%);
+
+$color-gray-lighter: darken(white, 10%);
+
+$color-link: $color-base;
+$color-link-active: adjust-hue($color-base, 180deg);
+
+$padding-page: 5%;

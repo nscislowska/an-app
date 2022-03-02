@@ -1,0 +1,38 @@
+body {
+    font-family: $font-family;
+    height:100vh;  
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    padding: 0 $padding-page;
+}
+
+.content {
+    @include screen(medium){
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+main {
+    a {
+        @include link-style();
+    }
+
+    @include screen(medium){
+        padding-left: 2em;
+    }
+}
+
+footer {
+    @include color($background-color: $color-base);
+    margin-top: auto;
+
+    a {
+        @include link-style($color: inherit);
+    }
+    
+}
+

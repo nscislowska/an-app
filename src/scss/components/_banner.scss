@@ -1,0 +1,27 @@
+@mixin banner($bg-img) {
+    background-image: url($bg-img);
+    position: relative;
+    width: 100%;
+}
+
+@mixin banner__text($top: auto, $right: auto, $bottom: auto, $left: auto, $float: none){
+    bottom: $bottom;
+    float: $float;
+    position: absolute;
+    top: $top;
+}
+
+.banner{
+    @include banner("../public/logo512.png");
+}
+
+.banner__text{
+    @include banner__text($bottom: 0, $right: 0, $float: right);
+    padding: 1em 2em;
+}
+
+.banner__text__title {
+    font: larger;
+    font-weight: bolder;
+    margin-bottom: 1em;
+}
