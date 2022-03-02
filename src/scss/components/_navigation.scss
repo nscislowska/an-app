@@ -14,7 +14,7 @@
 @mixin side-nav() {
     @include side-nav--visible(true);
     flex-direction: column;
-    margin: 2em 0;
+    padding: 0;
 
     @include screen(medium){
         @include side-nav--visible(false);
@@ -25,7 +25,7 @@
     @if $is-visible {
         position: fixed;
 
-        &.side-nav-hidden {
+        &.side-nav--hidden {
             left: -100%;
         }
         
@@ -65,9 +65,11 @@
     @include side-nav();
     background-color: white;
     text-align: center;
+    width: 100%;
 
     @include screen(medium) {
         min-width: 20%;
+        padding: 2em 0;
     }
 }
 

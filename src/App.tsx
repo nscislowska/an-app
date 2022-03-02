@@ -1,4 +1,5 @@
-import React from 'react';
+import { log } from 'console';
+import React, { useState } from 'react';
 import Navigation from './Navigation';
 
 const topItems = {
@@ -16,12 +17,12 @@ const sideItems = {
 };
 
 function App() {
-  let sideNavIsVisible = false;
+  const [sideNavIsVisible, setSideNavIsVisible] = useState(false);
 
   return (
     <div className="App">
     <header className="header container">
-        <button aria-label="Rozwiń menu" className="header__hamburger" onClick = {()=>{sideNavIsVisible = !sideNavIsVisible}}>
+        <button aria-label="Rozwiń menu" className="header__hamburger" onClick = {()=>{setSideNavIsVisible(!sideNavIsVisible)}}>
             <i className="fa fa-bars fa-2x"></i>
         </button>
         <div className="header__logo">
@@ -29,11 +30,11 @@ function App() {
                 <h1>MAGIX</h1>
             </a>
         </div>
-        <Navigation navType={'top-nav'} navItems={topItems}/>
-</header>
+        <Navigation navType={'top-nav'} items={topItems}/>
+    </header>
 
     <div className="content container">
-        <Navigation navType="side-nav" navItems={sideItems} isVisible={sideNavIsVisible}/>
+        <Navigation navType="side-nav" items={sideItems} isVisible={sideNavIsVisible}/>
         <main>
             <nav className="breadcrumbs">
                 <ul>

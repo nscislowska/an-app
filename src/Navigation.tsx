@@ -1,19 +1,19 @@
 import { Component } from "react";
 
+interface NavigationProps{
+    items : {[key : string] : string},
+    navType : string,
+    isVisible? : boolean;
+}
 
-class Navigation extends Component <any, any>{
-
-    constructor(props: any){
-        super(props);
-        this.state = {
-            activeItemId : 0,
-        }
-
+class Navigation extends Component<NavigationProps,any> {
+    constructor(props : NavigationProps){
+        super(props);    
     }
 
     render(){
-        const navLinks =  Object.entries(this.props.navItems).map(([title, ref]) => {
-            return <a className={`${this.props.navType}__item`} href={ref}>{title}</a>
+        const navLinks =  Object.entries(this.props.items).map(([title, ref]) => {
+            return <a key={title} className={`${this.props.navType}__item`} href={ref}>{title}</a>
         });
 
         let isVisibleClass: string;
@@ -34,5 +34,6 @@ class Navigation extends Component <any, any>{
         );
     }
 }
+
 
 export default Navigation;

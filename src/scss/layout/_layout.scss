@@ -1,8 +1,8 @@
 body {
-    font-family: $font-family;
-    height:100vh;  
-    display: flex;
+    display: flex; 
+    font-family: $font-family; 
     flex-direction: column;
+    height:100vh;
 }
 
 .container {
