@@ -1,0 +1,26 @@
+@mixin button($color, $background-color) {
+    background-color: $background-color;
+    border: 0;
+    color: $color;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+
+    &:hover {
+        @include color($background-color: get-hover-background-color($color, $background-color, $diff: 10%));
+        transition: background-color 300ms 0s ease;
+    }
+
+    &:active {
+        @include color($background-color: get-hover-background-color($color, $background-color, $diff: 20%));
+        transition: none;
+    }
+}
+
+.button {
+    @include button($color: black, $background-color: hsl(0, 0%, 85%));
+}
+
+.button--primary {
+    @include button($color: white, $background-color: $color-brand);
+}

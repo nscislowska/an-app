@@ -1,0 +1,5 @@
+
+.top-nav {
+    @include nav();
+    flex-direction: row;
+}

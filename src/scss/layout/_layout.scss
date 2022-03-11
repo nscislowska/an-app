@@ -6,33 +6,42 @@ body {
 }
 
 .container {
-    padding: 0 $padding-page;
+    padding: 0 $padding-page-mobile;
+    width: 100%;
+
+    @include media(tablet){
+        padding: 0 $padding-page-tablet;
+    };
+    @include media(desktop){
+        padding: 0 $padding-page-desktop;
+    };
 }
 
 .content {
-    @include screen(medium){
-        display: flex;
-        flex-direction: row;
-    }
+    @include row();
 }
+
 
 main {
     a {
         @include link-style();
     }
 
-    @include screen(medium){
-        padding-left: 2em;
-    }
+    @include span-columns($tablet: 9);
 }
 
-footer {
-    @include color($background-color: $color-base);
+
+.footer {
+    @include color($background-color: $color-brand);
     margin-top: auto;
 
     a {
         @include link-style($color: inherit);
     }
     
+}
+
+.footer__container{
+    padding: 1em 0;
 }
 

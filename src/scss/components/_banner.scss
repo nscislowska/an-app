@@ -1,27 +1,31 @@
-@mixin banner($bg-img) {
-    background-image: url($bg-img);
+.banner {
+    background-image: url('../images/image-not-found.png');
     position: relative;
     width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; 
 }
 
-@mixin banner__text($top: auto, $right: auto, $bottom: auto, $left: auto, $float: none){
+@mixin banner__text($color: black, $top: auto, $right: auto, $bottom: auto, $left: auto, $align: left){
     bottom: $bottom;
-    float: $float;
+    background-color: hsla(0, 0%, 100%, 0.7);
+    left: $left;
     position: absolute;
+    right: $right;
+    text-align: $align;
     top: $top;
 }
 
-.banner{
-    @include banner("../public/logo512.png");
-}
-
 .banner__text{
-    @include banner__text($bottom: 0, $right: 0, $float: right);
-    padding: 1em 2em;
+    @include banner__text($bottom: 0, $right: 0, $align: right);
+    font-weight: bold;
+    padding: 1em 1em;
 }
 
 .banner__text__title {
     font: larger;
     font-weight: bolder;
-    margin-bottom: 1em;
+    margin: 0 0 1.5em 0;
 }

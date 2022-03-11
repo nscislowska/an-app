@@ -8,12 +8,16 @@ interface NavigationProps{
 
 class Navigation extends Component<NavigationProps,any> {
     constructor(props : NavigationProps){
-        super(props);    
+        super(props);
+        this.state = {
+            activeItemId : 0
+        }
     }
 
     render(){
+        let itemStyle = this.props.navType === 'header__nav' ? 'button--primary' : '';
         const navLinks =  Object.entries(this.props.items).map(([title, ref]) => {
-            return <a key={title} className={`${this.props.navType}__item`} href={ref}>{title}</a>
+            return <a key={title} className={`button ${itemStyle} ${this.props.navType}__item`} href={ref}>{title}</a>
         });
 
         let isVisibleClass: string;

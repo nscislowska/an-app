@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @mixin color($background-color, $color: null){
     background-color: $background-color;
     @if $color != null{
@@ -8,13 +10,13 @@
     } 
 }
 
-@mixin screen($breakpoint) {
-    @media screen and (min-width: map-get($breakpoints, $breakpoint)){
+@mixin media($breakpoint, $mediatype: screen) {
+    @media #{$mediatype} and (min-width: map-get($breakpoints, $breakpoint)){
         @content;
     }
 }
 
-@mixin link-style($color: $color-base, $hover-decoration: underline, $display: inline){
+@mixin link-style($color: $color-brand, $hover-decoration: underline, $display: inline){
     text-decoration-line: none;
     color: $color;
     display: $display;
@@ -23,22 +25,31 @@
     }
 }
 
-@function get-hover-background-color($color, $background-color){
+@function get-hover-background-color($color, $background-color, $diff){
+    
     $hover-bg-color : $background-color;
-        //if very light background
-        @if lightness($background-color) > 100%-$color-step{
-            $hover-bg-color: darken($background-color, $color-step)
+        //if very light background, darken
+        @if lightness($background-color) >= 100%-$diff{
+            $hover-bg-color: darken($background-color, $diff)
         } 
-        //if very dark background
-        @else if lightness($background-color) < $color-step {
-            $hover-bg-color: lighten($background-color, $color-step)
+        //if very dark background, lighten
+        @else if lightness($background-color) <= $diff {
+            $hover-bg-color: lighten($background-color, $diff)
         } 
         //if not extreme background, choose with text color
         @else{
             $hover-bg-color: if(lightness($color) > 50%, 
-                                darken($background-color, $color-step), 
-                                lighten($background-color, $color-step))
+                                darken($background-color, $diff), 
+                                lighten($background-color, $diff))
         }
         @return $hover-bg-color
+}
+
+@function em($px) {
+    @return math.div($px, $rem-base)+em;
+}
+
+@function get-z-index($layer){
+    @return map-get($layers, $layer);
 }
 

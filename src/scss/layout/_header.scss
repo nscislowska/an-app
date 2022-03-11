@@ -1,33 +1,77 @@
-header{
-    @include color($background-color: $color-base);
-    display: flex;
-    align-items: stretch;
+header {
+    @include color($background-color: $color-brand);
+    line-height: 2.5;
     position: sticky;
     top: 0px;
-    justify-content: space-between;
-}
+    z-index: get-z-index(header);
 
-.header__logo{
-    text-align: center;
-    padding: 0.2em 1em;
-    font-family: $font-logo;
-    @include screen(medium){
-        width: 20%;
+    @include media(tablet) {
+        line-height: 5;
     }
 }
 
-.header__logo__link{
-    @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
+.header__container {
+    @include row();
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    @include media(tablet) {
+        flex-wrap: nowrap;
+    }
 }
 
-.header__hamburger{
+.header__logo {
+    font-size: 1.5em;
+    font-weight: bolder;
+    font-family: $font-logo;
+    text-align: center;
+
+    @include span-columns($tablet: 3, $mobile: 9);
+}
+
+.header__logo__link {
+    @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
+    height: 100%;
+}
+
+.header__hamburger {
     color: inherit;
     background-color: inherit;
     border: none;
     cursor: pointer;
     display: block;
-    padding-right: 1em;
-    @include screen(medium){
+    padding: 0;
+    
+    @include span-columns($mobile: 3);
+    @include media(tablet) {
         display: none;
+    }
+
+}
+
+.header__nav {
+    @extend .top-nav;
+    flex-wrap: wrap;
+    font-size: smaller;
+    font-weight: bold;
+    justify-content: stretch;
+    text-align: center;
+    white-space: nowrap;
+
+    @include span-columns($tablet: 9);
+    @include media(tablet) {
+        font-size: large;
+        justify-content: flex-end;
+    }
+    
+}
+
+.header__nav__item {
+    flex: 1;
+
+    @include media(tablet) {
+        flex: 0;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
     }
 }

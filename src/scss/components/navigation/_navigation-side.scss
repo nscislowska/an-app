@@ -1,0 +1,46 @@
+@mixin side-nav() {
+    @include nav();
+    @include side-nav--visible(true);
+    flex-direction: column;
+    z-index: get-z-index(menu);
+
+    @include media(tablet){
+        @include side-nav--visible(false);
+    }
+}
+
+@mixin side-nav--visible($is-visible) {
+    @if $is-visible {
+        position: fixed;
+
+        &.side-nav--hidden {
+            left: -100%;
+        }
+        
+        &.side-nav--visible {
+            left: 0;
+        }
+    }
+    @else {
+        position: static;
+    }
+}
+
+.side-nav {
+    @include side-nav();
+    background-color: white;
+    padding: 0;
+    text-align: center;
+
+    @include span-columns($tablet: 3);
+    width: 100%;
+    
+    @include media(tablet) {
+        padding: 2em 0;
+        text-align: left;
+    }
+}
+
+.side-nav__item{
+    @include nav-item();
+}

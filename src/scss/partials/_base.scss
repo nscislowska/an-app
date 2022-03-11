@@ -1,10 +1,19 @@
-$color-base: hsl(280, 100%, 30%);
-$color-base-lighter: lighten($color-base, 10%);
-$color-base-darker: darken($color-base, 10%);
+//========
+// COLORS
+//========
+$color-brand: hsl(280, 100%, 30%);
+$color-brand-lighter: lighten($color-brand, 10%);
+$color-brand-darker: darken($color-brand, 10%);
+$color-brand-darkest: darken($color-brand-darker, 10%);
 
 $color-gray-lighter: darken(white, 10%);
 
-$color-link: $color-base;
-$color-link-active: adjust-hue($color-base, 180deg);
+$color-link: $color-brand;
+$color-link-active: adjust-hue($color-brand, 180deg);
 
-$padding-page: 5%;
+//==========
+// PADDINGS
+//==========
+$padding-page-desktop: em(120px);
+$padding-page-tablet: em(40px);
+$padding-page-mobile: em(10px);

@@ -1,0 +1,13 @@
+@mixin nav() {
+    display: flex;
+    align-items: stretch;
+
+    a{
+        @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
+    }
+}
+
+@mixin nav-item() {
+    margin: 0;
+    padding: 0.5em 1em;
+}

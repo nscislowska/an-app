@@ -1,0 +1,28 @@
+.carousel{
+    width: 100%;
+    display: flex;
+}
+
+.carousel__button{
+    height: 100%;
+    flex-grow: 0;
+    padding: 0.5em;
+
+    &__icon{
+        
+    }
+}
+
+.carousel__display{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+}
+
+.carousel__display__item{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}

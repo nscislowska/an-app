@@ -12,8 +12,20 @@
 @import "partials/base";
 @import "partials/typography";
 
+//atoms
+@import "components/grid";
+@import "atoms/button";
+@import "atoms/icons";
+
 //components
-@import "layout/layout";
-@import "components/navigation";
+@import "components/banner";
+@import "components/carousel";
 @import "components/breadcrumbs";
+//------navigation
+@import "components/navigation/navigation";
+@import "components/navigation/navigation-side";
+@import "components/navigation/navigation-top";
+
+//layout
+@import "layout/layout";
 @import "layout/header";
