@@ -14,11 +14,11 @@
         position: fixed;
 
         &.side-nav--hidden {
-            left: -100%;
+            left: calc(-100% - 2*$padding-page-mobile);
         }
         
         &.side-nav--visible {
-            left: 0;
+            left: calc(-2*$padding-page-mobile);
         }
     }
     @else {

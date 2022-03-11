@@ -6,8 +6,8 @@ function Banner(props : {img: string|null, title: string, description : string})
     return(
         <div className="banner" style={style}>
             <p className="banner__text">  
-            <p className="banner__text__title">{props.title}</p> 
-                {props.description} 
+            <span className="banner__text__title">{props.title}</span> 
+            {props.description} 
             </p>
         </div>
     );

@@ -10,7 +10,7 @@
 
 @mixin banner__text($color: black, $top: auto, $right: auto, $bottom: auto, $left: auto, $align: left){
     bottom: $bottom;
-    background-color: hsla(0, 0%, 100%, 0.7);
+    background-color: hsla(0, 0%, 100%, 0.8);
     left: $left;
     position: absolute;
     right: $right;
@@ -20,11 +20,14 @@
 
 .banner__text{
     @include banner__text($bottom: 0, $right: 0, $align: right);
+    font-size: 1.2em;
     font-weight: bold;
+    letter-spacing: 0.07em; 
     padding: 1em 1em;
 }
 
 .banner__text__title {
+    display: block;
     font: larger;
     font-weight: bolder;
     margin: 0 0 1.5em 0;

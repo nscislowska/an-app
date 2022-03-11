@@ -5,10 +5,6 @@
 //browser
 $rem-base: 16px;
 
-//grid
-$grid-columns: 12;
-$grid-gap: 1.25rem;
-
 //screen types
 $breakpoints: (
     'mobile': 30em,
@@ -22,7 +18,13 @@ $layers: (
     menu: 800,
     tooltip: 100,
     text: 1
-)
+);
+
+//==================
+//GRID VAIRAIBLES
+//==================
+$grid-columns: 12;
+$grid-gap: 1.25rem;
 
 
 

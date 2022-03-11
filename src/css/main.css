@@ -93,17 +93,20 @@ body, nav, ul, ol {
 
 .banner__text {
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
   left: auto;
   position: absolute;
   right: 0;
   text-align: right;
   top: auto;
+  font-size: 1.2em;
   font-weight: bold;
+  letter-spacing: 0.07em;
   padding: 1em 1em;
 }
 
 .banner__text__title {
+  display: block;
   font: larger;
   font-weight: bolder;
   margin: 0 0 1.5em 0;
@@ -174,10 +177,10 @@ body, nav, ul, ol {
   text-decoration-line: none;
 }
 .side-nav.side-nav--hidden {
-  left: -100%;
+  left: calc(-100% - 2 * 0.625em);
 }
 .side-nav.side-nav--visible {
-  left: 0;
+  left: calc(-2 * 0.625em);
 }
 @media screen and (min-width: 48em) {
   .side-nav {

@@ -2,11 +2,7 @@
 // COLORS
 //========
 $color-brand: hsl(280, 100%, 30%);
-$color-brand-lighter: lighten($color-brand, 10%);
 $color-brand-darker: darken($color-brand, 10%);
-$color-brand-darkest: darken($color-brand-darker, 10%);
-
-$color-gray-lighter: darken(white, 10%);
 
 $color-link: $color-brand;
 $color-link-active: adjust-hue($color-brand, 180deg);

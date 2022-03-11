@@ -49,17 +49,14 @@ function App() {
                 </ul>
             </nav>
             <h2 id="main-title">Welcome</h2>  
-            <p>
-                On this wasteland:
-                <ol>
-                    <li>Menu options lead to nowewhere</li>
-                    <li>Side menu hides for smaller devices</li>
-                    <li>Carousel is interactive</li>
-                </ol>
-            </p>
-            
+            <span>On this wasteland:</span>
+            <ol style={{margin : '0.5em auto'}}>
+                <li>Menu options lead to nowewhere</li>
+                <li>Side menu hides for smaller devices</li>
+                <li>Carousel is interactive</li>
+            </ol>
             <Carousel items={
-                [<Banner img={watch} title="Time goes on and on!" description="Time stopping drugs availabe here.."/>,
+                [<Banner img={watch} title="Time goes on and on!" description="Time-stopping drugs availabe here.."/>,
                 <Banner img={beach} title="Go on vacation!" description="Diaherria-free travel destinations only here.."/>,
                 <Banner img={aliens} title="Believe!" description="The truth is out there.."/>]}
             />
