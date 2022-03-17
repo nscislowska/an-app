@@ -4,7 +4,8 @@
 @import "partials/variables";
 
 //helpers
-@import "partials/mixins";
+@import "mixins/mixins";
+@import "mixins/type-checking";
 @import "partials/helpers";
 
 //styles
@@ -12,8 +13,12 @@
 @import "partials/base";
 @import "partials/typography";
 
+//layout
+@import "layout/grid";
+@import "layout/layout";
+@import "layout/header";
+
 //atoms
-@import "components/grid";
 @import "atoms/button";
 @import "atoms/icons";
 
@@ -26,7 +31,3 @@
 @import "components/navigation/navigation";
 @import "components/navigation/navigation-side";
 @import "components/navigation/navigation-top";
-
-//layout
-@import "layout/layout";
-@import "layout/header";

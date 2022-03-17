@@ -13,8 +13,8 @@ interface NavigationProps{
 
 class Navigation extends Component<NavigationProps,any> {
 
-    itemClass1 =  `nav__item ${this.props.navClassName}__item--level1`;
-    itemClass2 = `nav__item ${this.props.navClassName}__item--level2`;
+    itemClass1 =  `nav__item ${this.props.navClassName}__item ${this.props.navClassName}__item--level1`;
+    itemClass2 = `nav__item ${this.props.navClassName}__item ${this.props.navClassName}__item--level2`;
 
     constructor(props : NavigationProps){
         super(props);

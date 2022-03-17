@@ -1,0 +1,47 @@
+@use "sass:math";
+
+@mixin row() {
+    display: flex;
+    flex-direction: row;
+    margin-left: -$grid-gap;
+    width: calc(100% + $grid-gap);
+}
+
+//width of an element from column span
+@mixin span-columns ($mobile: $grid-columns, $tablet: $mobile, $desktop: $tablet) {
+    margin-left: $grid-gap;
+
+    @if $mobile != false{
+        width: get-width($mobile);
+    }
+
+    @if $tablet != false and $tablet != $mobile {
+        @include media(tablet) {
+            width: get-width($tablet);
+        }
+    }
+
+    @if $desktop != false and $desktop != $tablet {
+        @include media(desktop) {
+            width: get-width($desktop);
+        }
+    }
+}
+
+// only integers are calculated as column span
+@function get-width($value){
+
+    @if is-percentage($value) or is-length($value){
+        @return $value;
+    }
+    @else if is-integer($value){
+        @return col-width($value);
+    }
+    @else {
+        @error 'Invalid value ' + $value + ': should be integer, percentage or length type';
+    }
+}
+
+@function col-width($cols) {
+    @return calc($cols/$grid-columns * 100% - $grid-gap);
+}
