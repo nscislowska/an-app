@@ -1,46 +1,43 @@
-@mixin side-nav() {
-    @include nav();
-    @include side-nav--visible(true);
-    flex-direction: column;
+@mixin side-nav--extractable{
+    position: fixed;
     z-index: get-z-index(menu);
+    transition: left 300ms;
 
-    @include media(tablet){
-        @include side-nav--visible(false);
+    &#{&}--hidden {
+        left: calc(-100% - 2*$padding-page-mobile);
     }
-}
-
-@mixin side-nav--visible($is-visible) {
-    @if $is-visible {
-        position: fixed;
-
-        &.side-nav--hidden {
-            left: calc(-100% - 2*$padding-page-mobile);
-        }
-        
-        &.side-nav--visible {
-            left: calc(-2*$padding-page-mobile);
-        }
+    
+    &#{&}--visible {
+        left: calc(-2*$padding-page-mobile);
     }
-    @else {
+
+    @include media(desktop){
         position: static;
     }
 }
 
 .side-nav {
-    @include side-nav();
-    background-color: white;
+    @include side-nav--extractable();
+    //background-color: white;
+    height: 100%;
     padding: 0;
-    text-align: center;
+    text-align: left;
+    width:100%;
 
-    @include span-columns($tablet: 3);
-    width: 100%;
+    @include span-columns($desktop: 3, $tablet: 7);
+
     
-    @include media(tablet) {
+    @include media(desktop) {
         padding: 2em 0;
-        text-align: left;
     }
 }
 
-.side-nav__item{
-    @include nav-item();
+.side-nav__item {
+    &--level1{
+        @include button($color: black, $background-color: $color-alt1-light, $hover-color: white, $active: false);
+    }
+
+    &--level2{
+        @include button($color: black, $background-color: $color-alt1-dark, $hover-color: white, $active: false);
+    }
 }

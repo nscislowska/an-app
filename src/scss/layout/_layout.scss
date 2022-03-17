@@ -27,7 +27,7 @@ main {
         @include link-style();
     }
 
-    @include span-columns($tablet: 9);
+    @include span-columns($desktop: 9);
 }
 
 

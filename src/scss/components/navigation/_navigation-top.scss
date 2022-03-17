@@ -1,5 +1,30 @@
-
 .top-nav {
-    @include nav();
-    flex-direction: row;
+    @extend .nav-horizontal;
+    flex-wrap: wrap;
+    font-size: smaller;
+    font-weight: bold;
+    justify-content: stretch;
+    text-align: center;
+    white-space: nowrap;
+
+    @include span-columns($tablet: 9);
+    @include media(tablet) {
+        font-size: large;
+        justify-content: flex-end;
+    }
+    
+}
+
+.top-nav__item {
+    flex: 1;
+
+    @include media(tablet) {
+        flex: 0;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+    }
+
+    &--level1{
+        @include button($color: white, $background-color: $color-brand, $active: false);
+    }
 }

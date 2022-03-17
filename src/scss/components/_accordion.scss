@@ -1,0 +1,21 @@
+.accordion {
+    width: 100%;
+}
+
+.accordion__item {
+}
+
+.accordion__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.accordion__pane {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

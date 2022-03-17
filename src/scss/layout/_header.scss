@@ -26,7 +26,7 @@ header {
     font-family: $font-logo;
     text-align: center;
 
-    @include span-columns($tablet: 3, $mobile: 9);
+    @include span-columns($tablet: 2, $mobile: 9);
 }
 
 .header__logo__link {
@@ -42,36 +42,10 @@ header {
     display: block;
     padding: 0;
     
-    @include span-columns($mobile: 3);
-    @include media(tablet) {
+    @include span-columns($tablet: 1 ,$mobile: 3);
+    @include media(desktop) {
         display: none;
     }
 
 }
 
-.header__nav {
-    @extend .top-nav;
-    flex-wrap: wrap;
-    font-size: smaller;
-    font-weight: bold;
-    justify-content: stretch;
-    text-align: center;
-    white-space: nowrap;
-
-    @include span-columns($tablet: 9);
-    @include media(tablet) {
-        font-size: large;
-        justify-content: flex-end;
-    }
-    
-}
-
-.header__nav__item {
-    flex: 1;
-
-    @include media(tablet) {
-        flex: 0;
-        padding-left: 1.5em;
-        padding-right: 1.5em;
-    }
-}

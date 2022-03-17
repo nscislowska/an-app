@@ -4,4 +4,8 @@ body, nav, ul, ol {
     margin: 0;
 }
 
+button > * {
+    pointer-events: none;
+  }
+
 

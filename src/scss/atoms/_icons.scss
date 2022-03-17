@@ -1,17 +1,26 @@
 
 .arrow {
+    $line-size: 3px;
     $size : 5px;
     border: solid black;
-    border-width: 0 em($size) em($size) 0;
+    border-width: 0 em($line-size) em($line-size) 0;
     display: inline-block;
     padding: em($size);
 
-    &.left{
+    &.down {
+      margin-top: em(-$size);
+    }
+
+    &.left {
         margin-right: em(-$size);
     }
 
-    &.right{
+    &.right {
         margin-left: em(-$size);
+    }
+
+    &.up {
+        margin-bottom: em(-$size);
     }
   }
 

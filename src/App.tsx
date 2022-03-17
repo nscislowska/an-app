@@ -1,25 +1,11 @@
-import { log } from 'console';
 import React, { useState } from 'react';
-import Banner from './Banner';
-import Navigation from './Navigation';
+import Banner from './components/Banner';
+import Navigation from './components/Navigation';
 import watch from './images/pocket-watch.jpg';
 import aliens from './images/aliens.jpg';
 import beach from './images/beach.jpg';
-import Carousel from './Carousel';
-
-const topItems = {
-    "Shop" : "#",
-    "Blog" : "#",
-    "Contact" : "#",
-    "About Us" : "#"
-};
-
-const sideItems = {
-    "side 1" : "#",
-    "side 2" : "#",
-    "side 3" : "#",
-    "side 4" : "#"
-};
+import Carousel from './components/Carousel';
+import { sideCategories, sideLinks, topLinks } from './constants';
 
 function App() {
   const [sideNavIsVisible, setSideNavIsVisible] = useState(false);
@@ -36,12 +22,12 @@ function App() {
                 MAGIX
             </a>
         </div>
-        <Navigation navType={'header__nav'} items={topItems}/>
+        <Navigation navClassName={'top-nav'} isVertical={false} links={topLinks}/>
         </div>
     </header>
 
     <div className="content container">
-        <Navigation navType="side-nav" items={sideItems} isVisible={sideNavIsVisible}/>
+        <Navigation navClassName={"side-nav"} isVertical={true} links={sideLinks} categories={sideCategories} isVisible={sideNavIsVisible}/>
         <main>
             <nav className="breadcrumbs">
                 <ul>
