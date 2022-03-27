@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import Accordion from "./Accordion";
 
 interface LinkList {[key : string] : string};
@@ -6,15 +7,16 @@ interface LinkList {[key : string] : string};
 interface NavigationProps{
     links : LinkList,
     categories? : {[key : string] : LinkList},
-    navClassName : string,
+    navType : string,
+    className?: string,
     isVertical : boolean;
     isVisible? : boolean;
 }
 
 class Navigation extends Component<NavigationProps,any> {
 
-    itemClass1 =  `nav__item ${this.props.navClassName}__item ${this.props.navClassName}__item--level1`;
-    itemClass2 = `nav__item ${this.props.navClassName}__item ${this.props.navClassName}__item--level2`;
+    itemClass1 =  `nav__item ${this.props.navType}__item ${this.props.navType}__item--level1`;
+    itemClass2 = `nav__item ${this.props.navType}__item ${this.props.navType}__item--level2`;
 
     constructor(props : NavigationProps){
         super(props);
@@ -31,9 +33,9 @@ class Navigation extends Component<NavigationProps,any> {
             isVisibleClass = "";
         } else{
             if(this.props.isVisible === true){
-                isVisibleClass = `${this.props.navClassName}--visible`;
+                isVisibleClass = `${this.props.navType}--visible`;
             } else{
-                isVisibleClass = `${this.props.navClassName}--hidden`;
+                isVisibleClass = `${this.props.navType}--hidden`;
             }
         }
 
@@ -42,7 +44,7 @@ class Navigation extends Component<NavigationProps,any> {
 
     makeLinks(list : LinkList, className:string){
         return  Object.entries(list).map(([title, ref]) => {
-            return <a key={title} className={className} href={ref}>{title}</a>
+            return <Link key={title} className={className} to={ref}>{title}</Link>
         });
     }
 
@@ -51,8 +53,9 @@ class Navigation extends Component<NavigationProps,any> {
         return(
         <nav className={`nav 
                         ${this.props.isVertical ? "nav-vertical" : 'nav-horizontal'} 
-                        ${this.props.navClassName} 
-                        ${this.getVisibilityClass()}`}>
+                        ${this.props.navType} 
+                        ${this.getVisibilityClass()}
+                        ${this.props.className ? this.props.className : ""} `}>
 
             {this.makeLinks(this.props.links, this.itemClass1)}
 

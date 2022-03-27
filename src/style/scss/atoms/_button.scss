@@ -1,0 +1,34 @@
+@mixin button($color, $background-color, $hover-color: null, $active: true) {
+    background-color: $background-color;
+    border: 0;
+    color: $color;
+    cursor: pointer;
+    font-size: inherit;
+    text-decoration: none;
+    padding: em(5px) em(10px);
+
+    @if $hover-color == null{
+        $hover-color: get-hover-background-color($color, $background-color, $diff: 10%);
+    }
+
+    &:hover {
+        @include color($background-color: $hover-color);
+        transition: background-color 300ms 0s ease;
+    }
+
+    @if $active{
+        &:active {
+            @include color($background-color: get-hover-background-color($color, $hover-color, $diff: 10%));
+            transition: none;
+        }
+    }
+    
+}
+
+.button {
+    @include button($color: black, $background-color: $color-alt1);
+}
+
+.button--primary {
+    @include button($color: white, $background-color: $color-brand);
+}

@@ -1,0 +1,47 @@
+@mixin side-nav--extractable{
+    position: fixed;
+    z-index: get-z-index(menu);
+    transition: left 300ms;
+
+    &#{&}--hidden {
+        left: calc(-100%);
+    }
+    
+    &#{&}--visible {
+        left: 0;
+    }
+
+    @include media(desktop){
+        position: static;
+    }
+}
+
+.side-nav {
+    $bg-color: $color-alt1-light;
+    @include side-nav--extractable();
+    background-color: $bg-color;
+    padding: 0;
+    text-align: left;
+    height: 100%;
+    // width: 100%;
+
+    @include media(tablet) {
+        // width: 50%;
+    }
+
+    @include media(desktop) {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        // width: auto;
+    }
+
+    &__item {
+        &--level1{
+            @include button($color: black, $background-color: $bg-color, $hover-color: white, $active: false);
+        }
+    
+        &--level2{
+            @include button($color: black, $background-color: $color-alt1-dark, $hover-color: white, $active: false);
+        }
+    }
+}

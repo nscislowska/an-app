@@ -1,0 +1,83 @@
+@use "sass:math";
+
+@mixin row() {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: -$grid-gap;
+    width: calc(100% + $grid-gap);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    // flex-wrap: wrap;
+    //margin-right: -$grid-gap;
+    width: calc(100% + $grid-gap);
+
+    :last-child{
+        margin-right: 0;
+    }
+
+    *{
+        flex-grow: 0;
+    }
+
+    
+}
+
+@each $size, $width in $breakpoints2{
+    @for $i from 1 through $grid-columns {
+        .col-#{$size}-#{$i}{
+            @media screen and (min-width: map-get($breakpoints2, $size)){
+                @if $i == $grid-columns{
+                    width: 100%;
+                } 
+                @else {
+                    width: calc($i/$grid-columns * 100% - $grid-gap);
+                    margin-right: $grid-gap;
+                }
+                
+            }  
+        }
+    }
+}
+
+//width of an element from column span
+@mixin span-columns ($mobile: $grid-columns, $tablet: $mobile, $desktop: $tablet) {
+    margin-left: $grid-gap;
+
+    @if $mobile != false{
+        width: get-width($mobile);
+    }
+
+    @if $tablet != false and $tablet != $mobile {
+        @include media(tablet) {
+            width: get-width($tablet);
+        }
+    }
+
+    @if $desktop != false and $desktop != $tablet {
+        @include media(desktop) {
+            width: get-width($desktop);
+        }
+    }
+}
+
+// only integers are calculated as column span
+@function get-width($value){
+
+    @if is-percentage($value) or is-length($value){
+        @return $value;
+    }
+    @else if is-integer($value){
+        @return col-width($value);
+    }
+    @else {
+        @error 'Invalid value ' + $value + ': should be integer, percentage or length type';
+    }
+}
+
+@function col-width($cols) {
+    @return calc($cols/$grid-columns * 100% - $grid-gap);
+}

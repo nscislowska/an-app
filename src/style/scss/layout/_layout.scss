@@ -1,0 +1,49 @@
+html {
+    scroll-padding-top: $height-header;
+}
+
+body {
+    display: flex; 
+    font-family: $font-family; 
+    flex-flow: column;
+    height:100vh;
+}
+
+.page-container {
+    padding: 0 $padding-page-mobile;
+    width: 100%;
+
+    @include media(tablet){
+        padding: 0 $padding-page-tablet;
+    };
+    @include media(desktop){
+        padding: 0 $padding-page-desktop;
+    };
+}
+
+.content {
+    flex: 1;
+}
+
+
+main {
+    a {
+        @include link-style();
+    }
+}
+
+
+.footer {
+    @include color($background-color: $color-brand);
+    margin-top: auto;
+
+    a {
+        @include link-style($color: inherit);
+    }
+    min-width: fit-content;
+}
+
+.footer__container{
+    padding: 1em 0;
+}
+

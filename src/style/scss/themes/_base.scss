@@ -1,0 +1,29 @@
+//========
+// COLORS
+//========
+$color-brand: hsl(280, 100%, 30%);
+$color-brand-darker: darken($color-brand, 10%);
+$color-brand-light: lighten($color-brand, 40%);
+$color-brand-lighter: lighten($color-brand, 60%);
+
+$color-alt1-light: hsl(0,0%, 90%);
+$color-alt1: hsl(0, 0%, 85%);
+$color-alt1-dark: hsl(0, 0%, 77%);
+
+$color-link: lighten($color-brand, 20%);
+$color-link-active: adjust-hue($color-brand, 180deg);
+
+//==========
+// FIXED HEIGHT
+//==========
+
+$height-header: 120px;
+
+//==========
+// PADDINGS
+//==========
+$padding-button: em(10px);
+
+$padding-page-desktop: em(120px);
+$padding-page-tablet: em(40px);
+$padding-page-mobile: em(10px);

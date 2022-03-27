@@ -1,0 +1,36 @@
+//==================
+//GLOBAL VAIRAIBLES
+//==================
+
+//browser
+$rem-base: 16px;
+
+//screen types
+$breakpoints: (
+    'mobile': 25em,
+    'tablet': 48em,
+    'desktop': 80em
+);
+
+$breakpoints2: (
+    'sm': 0em,
+    'md': 48em,
+    'lg': 80em
+);
+
+//z-index
+$layers: (
+    header: 900,
+    menu: 800,
+    tooltip: 100,
+    text: 1
+);
+
+//==================
+//GRID VAIRAIBLES
+//==================
+$grid-columns: 12;
+$grid-gap: 1.25rem;
+
+
+

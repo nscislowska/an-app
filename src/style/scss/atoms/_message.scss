@@ -1,0 +1,18 @@
+.message {
+    color:  hsl(0, 0%, 0%);
+    background-color: hsl(0, 0%, 95%);
+    border: em(2px) solid hsl(0, 0%, 70%);
+    border-radius: em(3px);
+    padding: em(7px);
+
+    &.error{
+        color: hsl(0, 100%, 40%);
+        background-color: hsl(0, 100%, 95%);
+        border-color: hsl(0, 100%, 80%);
+    }
+    &.success{
+        color: hsl(100, 100%, 20%);
+        background-color: hsl(100, 100%, 95%);
+        border-color: hsl(100, 60%, 50%);
+    }
+}
