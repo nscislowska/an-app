@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from './components/Navigation';
-import { sideCategories, sideLinks, topLinks } from './constants';
+import { HOME_PATH, sideCategories, sideLinks, topLinks } from './constants';
 import { Link, Route, Routes } from 'react-router-dom';
 import ShopPage from './pages/shop';
 import LandingPage from './pages/landing';
@@ -21,7 +21,7 @@ function App(){
                 <i className="fa fa-bars fa-2x"></i>
             </button>
             <div className="header__logo">
-                <Link to="/" className="header__logo__link">
+                <Link to={HOME_PATH} className="header__logo__link">
                     MAGIX
                 </Link>
             </div>
@@ -34,14 +34,14 @@ function App(){
             <main className='col-sm-12 col-md-12 col-lg-9'>
             <nav className="breadcrumbs">
                     <ul>
-                        <li className="crumb"><Link to="/">Homepage</Link></li>
+                        <li className="crumb"><Link to={HOME_PATH}>Homepage</Link></li>
                     </ul>
             </nav>
             <Routes>
-                <Route path="/" element={<LandingPage/>}/>
-                {!isLoggedIn && <Route path="/account" element={<LoginPage/>}/>}
-                {isLoggedIn && <Route path="/account" element={<AccountPage/>}/>}
-                <Route path='/shop' element={<ShopPage/>}/>
+                <Route path={HOME_PATH} element={<LandingPage/>}/>
+                {!isLoggedIn && <Route path={HOME_PATH + "/account"} element={<LoginPage/>}/>}
+                {isLoggedIn && <Route path={HOME_PATH + "/account"} element={<AccountPage/>}/>}
+                <Route path={HOME_PATH + '/shop'} element={<ShopPage/>}/>
             </Routes>
             </main>
         </div>

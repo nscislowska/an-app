@@ -2,10 +2,11 @@ html {
     scroll-padding-top: $height-header;
 }
 
-body {
-    display: flex; 
-    font-family: $font-family; 
+//site root container
+.App{
+    display: flex;
     flex-flow: column;
+    font-family: $font-family; 
     height:100vh;
 }
 
@@ -22,7 +23,7 @@ body {
 }
 
 .content {
-    flex: 1;
+    flex: 2;
 }
 
 

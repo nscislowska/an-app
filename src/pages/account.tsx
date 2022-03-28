@@ -7,6 +7,7 @@ import { User } from "../database/dbTypes";
 import { RootState } from "../redux/store/store";
 import { sessionActions } from "../redux/actions/sessionActions";
 import { Link } from "react-router-dom";
+import { HOME_PATH } from "../constants";
 
 const mapStateToProps = (state : RootState) => {
     return {
@@ -128,7 +129,7 @@ class AccountPage extends Component<Props, any> {
             <div>
                 <h2>Your Account</h2>
                 <p className="message">
-                    Change the first name and go back to <Link to="/">Homepage</Link>.
+                    Change the first name and go back to <Link to={HOME_PATH}>Homepage</Link>.
                     </p>
                 <p className="message">    
                     Changes are not permement - they won't be here after leaving this site. 

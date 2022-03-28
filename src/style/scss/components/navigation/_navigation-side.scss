@@ -23,16 +23,14 @@
     padding: 0;
     text-align: left;
     height: 100%;
-    // width: 100%;
 
     @include media(tablet) {
-        // width: 50%;
     }
 
     @include media(desktop) {
         margin-top: 2em;
         margin-bottom: 2em;
-        // width: auto;
+        height: auto;
     }
 
     &__item {

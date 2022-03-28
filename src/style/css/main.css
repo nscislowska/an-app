@@ -283,10 +283,10 @@ html {
   scroll-padding-top: 120px;
 }
 
-body {
+.App {
   display: flex;
-  font-family: Tahoma, Verdana, Segoe, sans-serif;
   flex-flow: column;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
   height: 100vh;
 }
 
@@ -306,7 +306,7 @@ body {
 }
 
 .content {
-  flex: 1;
+  flex: 2;
 }
 
 main a {
@@ -340,6 +340,7 @@ main a:hover {
 header {
   background-color: #660099;
   color: white;
+  height: 120px;
   line-height: 2.5;
   position: sticky;
   top: 0px;
@@ -675,6 +676,7 @@ header {
   .side-nav {
     margin-top: 2em;
     margin-bottom: 2em;
+    height: auto;
   }
 }
 .side-nav__item--level1 {

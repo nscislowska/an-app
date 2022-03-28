@@ -1,25 +1,24 @@
+export const HOME_PATH = '/an-app';
+
 export const topLinks = {
     // "Shop" : "/shop",
-    "Account" : "/account",
-    "Option 1" : '/',
-    'Option 2' : '/',
-    'Option 3' : '/'
+    "Account" : HOME_PATH+"/account",
 };
 
 export const sideLinks = {
-    "Option 1" : "/",
-    "Option 2" : "/",
-    "Option 3" : "/",
+    "Option 1" : HOME_PATH,
+    "Option 2" : HOME_PATH,
+    "Option 3" : HOME_PATH,
 };
 
 export const sideCategories ={
     "More options 1" : {
-        "Link to nowewhere" : "/",
-        "Another link to nowewhere" : "/"
+        "Link to nowewhere" : HOME_PATH,
+        "Another link to nowewhere" : HOME_PATH
     },
     "More options 2" : {
-        "Link to elsewhere" : "/",
-        "Another link to elsewhere" : "/"
+        "Link to elsewhere" : HOME_PATH,
+        "Another link to elsewhere" : HOME_PATH
     },
 }
 

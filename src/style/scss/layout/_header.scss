@@ -1,5 +1,6 @@
 header {
     @include color($background-color: $color-brand);
+    height: $height-header;
     line-height: 2.5;
     position: sticky;
     top: 0px;
