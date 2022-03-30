@@ -1,19 +1,10 @@
 @use "sass:math";
 
-@mixin row() {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-left: -$grid-gap;
-    width: calc(100% + $grid-gap);
-}
-
 .row {
     display: flex;
     flex-direction: row;
-    // flex-wrap: wrap;
-    //margin-right: -$grid-gap;
-    width: calc(100% + $grid-gap);
+    overflow: hidden;
+    width: 100%;
 
     :last-child{
         margin-right: 0;
@@ -21,9 +12,7 @@
 
     *{
         flex-grow: 0;
-    }
-
-    
+    }  
 }
 
 @each $size, $width in $breakpoints2{

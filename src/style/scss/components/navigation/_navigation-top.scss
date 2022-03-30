@@ -7,7 +7,6 @@
     text-align: center;
     white-space: nowrap;
 
-    @include span-columns($tablet: 9);
     @include media(tablet) {
         font-size: large;
         justify-content: flex-end;
@@ -16,15 +15,13 @@
 }
 
 .top-nav__item {
+    @include button($color: white, $background-color: $color-brand, $active: false);
     flex: 1;
+    padding: 0 0.5em;
+   
 
     @include media(tablet) {
         flex: 0;
-        padding-left: 1.5em;
-        padding-right: 1.5em;
-    }
-
-    &--level1{
-        @include button($color: white, $background-color: $color-brand, $active: false);
+        padding-left: 0 1.5em;
     }
 }

@@ -8,6 +8,7 @@ import LoginPage from './pages/login';
 import AccountPage from './pages/account';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store/store';
+import NotFoundPage from './pages/notFound';
 
 function App(){
     const [sideNavIsVisible, setSideNavIsVisible] = useState(false);
@@ -16,16 +17,16 @@ function App(){
       return (
         <div className="App">
         <header className="header page-container">
-            <div className="header__container">
-            <button aria-label="Expand menu" className="header__hamburger" onClick = {()=>{setSideNavIsVisible(!sideNavIsVisible)}}>
+            <div className="header__container row">
+            <button aria-label="Expand menu" className="col-sm-3 col-md-1 header__hamburger" onClick = {()=>{setSideNavIsVisible(!sideNavIsVisible)}}>
                 <i className="fa fa-bars fa-2x"></i>
             </button>
-            <div className="header__logo">
+            <div className="col-sm-5 col-md-2 header__logo">
                 <Link to={HOME_PATH} className="header__logo__link">
                     MAGIX
                 </Link>
             </div>
-            <Navigation navType={'top-nav'} isVertical={false} links={topLinks}/>
+            <Navigation navType={'top-nav'} className="col-sm-4 col-md-9" isVertical={false} links={topLinks}/>
             </div>
         </header>
 
@@ -42,6 +43,7 @@ function App(){
                 {!isLoggedIn && <Route path={HOME_PATH + "/account"} element={<LoginPage/>}/>}
                 {isLoggedIn && <Route path={HOME_PATH + "/account"} element={<AccountPage/>}/>}
                 <Route path={HOME_PATH + '/shop'} element={<ShopPage/>}/>
+                <Route path={HOME_PATH + '/*'} element={<NotFoundPage/>}/>
             </Routes>
             </main>
         </div>

@@ -1,4 +1,4 @@
-export const HOME_PATH = '/an-app';
+export const HOME_PATH = '';
 
 export const topLinks = {
     // "Shop" : "/shop",

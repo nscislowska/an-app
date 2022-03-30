@@ -21,7 +21,8 @@ button > * {
 .row {
   display: flex;
   flex-direction: row;
-  width: calc(100% + 1.25rem);
+  overflow: hidden;
+  width: 100%;
 }
 .row :last-child {
   margin-right: 0;
@@ -341,23 +342,13 @@ header {
   background-color: #660099;
   color: white;
   height: 120px;
-  line-height: 2.5;
+  line-height: 120px;
   position: sticky;
   top: 0px;
   z-index: 900;
 }
-@media screen and (min-width: 48em) {
-  header {
-    line-height: 5;
-  }
-}
 
 .header__container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-left: -1.25rem;
-  width: calc(100% + 1.25rem);
   align-items: stretch;
   flex-wrap: wrap;
 }
@@ -372,13 +363,6 @@ header {
   font-weight: bolder;
   font-family: "Courier New", Courier, monospace;
   text-align: center;
-  margin-left: 1.25rem;
-  width: calc(75% - 1.25rem);
-}
-@media screen and (min-width: 48em) {
-  .header__logo {
-    width: calc(16.6666666667% - 1.25rem);
-  }
 }
 
 .header__logo__link {
@@ -398,13 +382,6 @@ header {
   cursor: pointer;
   display: block;
   padding: 0;
-  margin-left: 1.25rem;
-  width: calc(25% - 1.25rem);
-}
-@media screen and (min-width: 48em) {
-  .header__hamburger {
-    width: calc(8.3333333333% - 1.25rem);
-  }
 }
 @media screen and (min-width: 80em) {
   .header__hamburger {
@@ -715,13 +692,6 @@ header {
   justify-content: stretch;
   text-align: center;
   white-space: nowrap;
-  margin-left: 1.25rem;
-  width: calc(100% - 1.25rem);
-}
-@media screen and (min-width: 48em) {
-  .top-nav {
-    width: calc(75% - 1.25rem);
-  }
 }
 @media screen and (min-width: 48em) {
   .top-nav {
@@ -731,16 +701,6 @@ header {
 }
 
 .top-nav__item {
-  flex: 1;
-}
-@media screen and (min-width: 48em) {
-  .top-nav__item {
-    flex: 0;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-  }
-}
-.top-nav__item--level1 {
   background-color: #660099;
   border: 0;
   color: white;
@@ -748,11 +708,19 @@ header {
   font-size: inherit;
   text-decoration: none;
   padding: 0.3125em 0.625em;
+  flex: 1;
+  padding: 0 0.5em;
 }
-.top-nav__item--level1:hover {
+.top-nav__item:hover {
   background-color: #440066;
   color: white;
   transition: background-color 300ms 0s ease;
+}
+@media screen and (min-width: 48em) {
+  .top-nav__item {
+    flex: 0;
+    padding-left: 0 1.5em;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

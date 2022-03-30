@@ -1,18 +1,13 @@
 header {
     @include color($background-color: $color-brand);
     height: $height-header;
-    line-height: 2.5;
+    line-height: $height-header;
     position: sticky;
     top: 0px;
     z-index: get-z-index(header);
-
-    @include media(tablet) {
-        line-height: 5;
-    }
 }
 
 .header__container {
-    @include row();
     align-items: stretch;
     flex-wrap: wrap;
 
@@ -26,8 +21,6 @@ header {
     font-weight: bolder;
     font-family: $font-logo;
     text-align: center;
-
-    @include span-columns($tablet: 2, $mobile: 9);
 }
 
 .header__logo__link {
@@ -42,8 +35,7 @@ header {
     cursor: pointer;
     display: block;
     padding: 0;
-    
-    @include span-columns($tablet: 1 ,$mobile: 3);
+
     @include media(desktop) {
         display: none;
     }
