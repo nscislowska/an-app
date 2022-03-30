@@ -132,7 +132,7 @@ class AccountPage extends Component<Props, any> {
                     Change the first name and go back to <Link to={HOME_PATH}>Homepage</Link>.
                     </p>
                 <p className="message">    
-                    Changes are not permement - they won't be here after leaving this site. 
+                    Changes are not permement - data will reset after refreshing this site. 
                     </p>
                 <h3>Personal data</h3>
                 {this.state.userUpdateSuccess && <p className="message success">Data updated successfully.</p>}
