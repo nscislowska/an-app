@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navigation from './components/Navigation';
 import { HOME_PATH, sideCategories, sideLinks, topLinks } from './constants';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import ShopPage from './pages/shop';
 import LandingPage from './pages/landing';
 import LoginPage from './pages/login';
@@ -9,10 +9,12 @@ import AccountPage from './pages/account';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store/store';
 import NotFoundPage from './pages/notFound';
+import PrivateRoute from './components/PrivateRoute';
 
 function App(){
     const [sideNavIsVisible, setSideNavIsVisible] = useState(false);
     const isLoggedIn = useSelector( (state : RootState) => state.sessionReducer.isLoggedIn);
+    const navigate = useNavigate();
 
       return (
         <div className="App">
@@ -39,11 +41,14 @@ function App(){
                     </ul>
             </nav>
             <Routes>
-                <Route path={HOME_PATH} element={<LandingPage/>}/>
-                {!isLoggedIn && <Route path={HOME_PATH + "/account"} element={<LoginPage/>}/>}
-                {isLoggedIn && <Route path={HOME_PATH + "/account"} element={<AccountPage/>}/>}
-                <Route path={HOME_PATH + '/shop'} element={<ShopPage/>}/>
-                <Route path={HOME_PATH + '/*'} element={<NotFoundPage/>}/>
+                <Route path='/' element={<LandingPage/>}/>
+                <Route path='/login' element={<LoginPage navigate={navigate}/>}/>
+                <Route path="/account" element={
+                                        <PrivateRoute>
+                                            <AccountPage/>
+                                        </PrivateRoute>}/>
+                {/* <Route path='/shop' element={<ShopPage/>}/> */}
+                <Route path='/*' element={<NotFoundPage/>}/>
             </Routes>
             </main>
         </div>

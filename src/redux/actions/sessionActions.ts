@@ -9,10 +9,11 @@ const loginSuccess = (user : User) => {
     };
 };
 
-const loginFailure = (error : string) => {
+const loginFailure = (errorMessage : string) => {
     return {
         type: LOGIN_FALIURE,
-        error
+        user: null,
+        errorMessage
     };
 };
 
@@ -25,19 +26,19 @@ const loginRequest = (user : User | undefined) => {
 
 const login = (username: string, password: string) => {
     let action;
-    let user = users.find(user => user.login === username);
+    let user = users.find(user => user.username === username);
     if (user && user.password === password){
-        localStorage.setItem("account", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(user));
         action = loginSuccess(user);
     } else {
-        action = loginFailure("");
+        action = loginFailure("Incorrect login or password.");
     }
     
     return action;
 }
 
 const logout = () => {
-    localStorage.removeItem("account");
+    localStorage.removeItem("user");
     return {
         type: LOGOUT,
         user: null
@@ -45,6 +46,7 @@ const logout = () => {
 }
 
 const updateUser = (user : User) => {
+    localStorage.setItem("user", JSON.stringify(user));
     return {
         type: UPDATE_USER,
         user

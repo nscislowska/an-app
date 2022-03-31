@@ -3,32 +3,48 @@ import { LOGIN_FALIURE, LOGIN_SUCCESS, LOGOUT, UPDATE_USER } from "../actions/se
 
 interface sessionReducerState{
     isLoggedIn: boolean,
-    user: User | null
-}
-const initialState = {
-    isLoggedIn: false,
-    user: null
+    user: User | null,
+    errorMessage? : string
 }
 
-export const sessionReducer = (state : sessionReducerState = initialState, action : {type: string, user: User}) => {
+const getStateFromStorage = () : sessionReducerState => {   
+    let localUser = localStorage.getItem('user');
+    console.log(localUser)
+    return{
+        isLoggedIn: localUser !== null,
+        user: localUser ? JSON.parse(localUser) as User : null
+    }
+}
+const initialState = getStateFromStorage();
+
+const getState = (user: User | null) => {
+    return{
+        isLoggedIn: user !== null,
+        user: user
+    }
+}
+
+export const sessionReducer = (state : sessionReducerState = initialState, 
+                               action : {type: string, user: User | null, errorMessage?: string
+}) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
             return {
-                isLoggedIn: true, 
-                user: action.user
+                ...getState(action.user)
             }
         case LOGIN_FALIURE:
-            return initialState
-            
+            return {
+                ...getState(action.user),
+                errorMessage: action.errorMessage
+            }
         case LOGOUT:
-            return initialState
-
+            return {
+                ...getState(action.user)
+            }
         case UPDATE_USER:
-                return {
-                    ...state,
-                    user: action.user
-                }
-
+            return {
+                ...getState(action.user)
+            }
         default: return state;
     }
 }

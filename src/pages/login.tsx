@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Input, { InputError, validateInput } from "../components/Input";
 import { stringValidation } from "../components/validation";
 import { sessionActions } from "../redux/actions/sessionActions";
@@ -7,7 +8,6 @@ import { RootState } from "../redux/store/store";
 
 class LoginPage extends Component<any, any> {
 
-    loginFailMessage = "Incorrect login or password.";
     usernameEmptyMessage = "Login is required.";
     passwordEmptyMessage = "Password is required.";
 
@@ -20,7 +20,6 @@ class LoginPage extends Component<any, any> {
                 password : {value: "", error: {state: false, message: ''}, 
                     validation: {func: stringValidation, params:{min: 1}}},
             },
-            loginError : {state: false, message: this.loginFailMessage},
         }
 
         this.submitHandler = this.submitHandler.bind(this);
@@ -74,19 +73,20 @@ class LoginPage extends Component<any, any> {
             }
             else{
                 this.props.login(this.field('username').value, this.field('password').value);
-                if(!this.props.isLoggedIn){
-                    this.setState({loginError : {state: true, message: this.loginFailMessage}});
-                }
             }
         }
     }
 
     render(){
+        if(this.props.isLoggedIn){
+            this.props.navigate(-1);
+        }
         return(
             <div>
+            
             <h2>Login</h2>
             <p className="message">Available with credentials: <i>mylogin, mypassword</i>.</p>
-            {this.state.loginError.state && <p className="message error">{this.state.loginError.message}</p>}
+            {this.props.loginFailMessage && <p className="message error">{this.props.loginFailMessage}</p>}
             <form className="form col-lg-5 col-md-5 col-sm-12" onSubmit={this.submitHandler}>
                 <Input 
                     type="input"
@@ -117,7 +117,8 @@ class LoginPage extends Component<any, any> {
 
 const mapStateToProps = (state : RootState) => {
     return {
-        isLoggedIn: state.sessionReducer.isLoggedIn
+        isLoggedIn: state.sessionReducer.isLoggedIn,
+        loginFailMessage: state.sessionReducer.errorMessage
     }
   }
 

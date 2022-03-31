@@ -17,7 +17,8 @@ const mapStateToProps = (state : RootState) => {
 
 const mapDispatchToProps = (dispatch : Function) => {
     return {
-        updateUser: (user : User) => dispatch(sessionActions.updateUser(user))
+        updateUser: (user : User) => dispatch(sessionActions.updateUser(user)),
+        logout: () => dispatch(sessionActions.logout())
     }
   }
   
@@ -129,18 +130,26 @@ class AccountPage extends Component<Props, any> {
             <div>
                 <h2>Your Account</h2>
                 <p className="message">
-                    Change the first name and go back to <Link to={HOME_PATH}>Homepage</Link>.
+                    Change the first name and go back to <Link to='/'>Homepage</Link>.
                     </p>
                 <p className="message">    
                     Changes are not permement - data will reset after refreshing this site. 
                     </p>
-                <h3>Personal data</h3>
                 {this.state.userUpdateSuccess && <p className="message success">Data updated successfully.</p>}
                 {this.state.userUpdateFail && <p className="message error">Data update ended with fail.</p>}
-                    <form className="form col-sm-12 col-md-4 col-lg-4" onSubmit={this.submitHandler}>
-                       {personalDataInput}
-                        <button className="button form__control" type='submit'>Update</button>
-                    </form>
+                <div className="row">
+                    <div className="col-sm-12 col-md-4 col-lg-4">
+                        <h3>Change personal data</h3>
+                        <form className="form" onSubmit={this.submitHandler}>
+                        {personalDataInput}
+                            <button className="button form__control" type='submit'>Update</button>
+                        </form>
+                    </div>
+                    <div className="col-sm-12 col-md-4 col-lg-4">
+                        <h3>Other Actions</h3>
+                        <button className="button" onClick={this.props.logout}>Log out</button>
+                    </div>
+                </div>
             </div>
         )
     }

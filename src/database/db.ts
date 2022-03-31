@@ -3,7 +3,7 @@ import { Book, User } from "./dbTypes";
 export let users : User[] = [
     {
         id : 1,
-        login : 'mylogin',
+        username : 'mylogin',
         password : 'mypassword',
         firstname : 'John',
         lastname : 'Doe',
