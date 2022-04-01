@@ -9,7 +9,6 @@ interface sessionReducerState{
 
 const getStateFromStorage = () : sessionReducerState => {   
     let localUser = localStorage.getItem('user');
-    console.log(localUser)
     return{
         isLoggedIn: localUser !== null,
         user: localUser ? JSON.parse(localUser) as User : null

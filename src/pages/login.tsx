@@ -1,133 +1,88 @@
-import React, { Component, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Input, { InputError, validateInput } from "../components/Input";
 import { stringValidation } from "../components/validation";
 import { sessionActions } from "../redux/actions/sessionActions";
 import { RootState } from "../redux/store/store";
 
-class LoginPage extends Component<any, any> {
+const LoginPage = () => {
 
-    usernameEmptyMessage = "Login is required.";
-    passwordEmptyMessage = "Password is required.";
+    const initFields : {[key : string] : any}[] = [
+        {name: "username", type: "input", value: "", error: {state: false, message: ''}, 
+            label: 'Login', validation: {func: stringValidation, params:{min: 1}}},
+        {name: "password", type: "password", value: "", error: {state: false, message: ''}, 
+        label: 'Password', validation: {func: stringValidation, params:{min: 1}}},
+        ];
+    const [fields, setFields] = useState(initFields);
+    const navigate = useNavigate();
 
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            fields : {
-                username : {value: "", error: {state: false, message: ''}, 
-                    validation: {func: stringValidation, params:{min: 1}}},
-                password : {value: "", error: {state: false, message: ''}, 
-                    validation: {func: stringValidation, params:{min: 1}}},
-            },
+    const isLoggedIn = useSelector((state : RootState) => state.sessionReducer.isLoggedIn);
+    const loginFailMessage = useSelector((state : RootState) => state.sessionReducer.errorMessage);
+    const dispatch = useDispatch();
+    const login = (username:string, password:string) => {
+        dispatch(sessionActions.login(username, password));
+    }
+
+    const getField = (name : string, property? : string) : any => {
+        let field = fields.find((field) => field.name === name);
+        return field ? (property ? field[property] : field) : null;
+    }
+
+    const updateField = (fieldName: string, value: any, error: InputError) => {
+        let index = fields.findIndex((field)=> field.name === fieldName);
+        fields[index].value = value;
+        fields[index].error = error;
+        setFields([...fields]);
+    }
+
+    const validateAll = () => {
+        for(let i in fields){
+            let error = validateInput(fields[i].value, fields[i].validation);
+            fields[i].error = error;
         }
-
-        this.submitHandler = this.submitHandler.bind(this);
-        this.getData = this.getData.bind(this);
-        this.field = this.field.bind(this);
-        this.fieldExists = this.fieldExists.bind(this);
-        this.validateAll = this.validateAll.bind(this);
+        setFields([...fields]);
     }
 
-    getData(fieldName: any, value: any, error: InputError){
-        this.setState((state:any)=>{
-            let fields = state.fields;
-            let field = fields[fieldName];
-            field.value = value;
-            field.error = error;
-            fields[fieldName] = field;
-            return {fields};
-        });
-    }
-
-    field(fieldName: string){
-        return this.state.fields[fieldName];
-    }
-
-    fieldExists(property: string, value: any, property2?:string) : boolean{
-        if (property2) {
-            return Object.keys(this.state.fields).some(fieldName => this.field(fieldName)[property][property2] === value);
-        } 
-        else {
-            return Object.keys(this.state.fields).some(fieldName => this.field(fieldName)[property] === value);
-        }
-    }
-
-    validateAll(){
-        let fields : {[key: string] : any} = {};
-        for(let fieldName of Object.keys(this.state.fields)){
-            let field = this.field(fieldName);
-            let error = validateInput(field.value, field.validation);
-            field.error = error;
-            fields[fieldName] = field;
-        }
-        this.setState({fields});
-    }
-
-    submitHandler(event : React.FormEvent<HTMLFormElement>) {
+    const submitHandler = (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        let dataHasError = this.fieldExists('error',true, 'state');
+        validateAll();
+        let dataHasError = fields.some(field => field.error.state);
         if(!dataHasError) {
-            if(this.fieldExists('value', "")){
-                this.validateAll();
-            }
-            else{
-                this.props.login(this.field('username').value, this.field('password').value);
-            }
+            login(getField('username', 'value'), getField('password', 'value'));
         }
     }
+        
+    useEffect(() => {
+        // go back to previous page
+        if (isLoggedIn) navigate(-1);
+    }, [isLoggedIn]);
 
-    render(){
-        if(this.props.isLoggedIn){
-            this.props.navigate(-1);
-        }
-        return(
+    return(
             <div>
-            
             <h2>Login</h2>
             <p className="message">Available with credentials: <i>mylogin, mypassword</i>.</p>
-            {this.props.loginFailMessage && <p className="message error">{this.props.loginFailMessage}</p>}
-            <form className="form col-lg-5 col-md-5 col-sm-12" onSubmit={this.submitHandler}>
-                <Input 
-                    type="input"
-                    name="username"
-                    label="Login"
-                    value = {this.state.fields.username.value}
-                    className = ""
-                    passData={this.getData}
-                    validation = {this.field('username').validation}
-                    error = {this.state.fields.username.error}
-                    />
-                <Input 
-                    type="password"
-                    name="password"
-                    label="Password"
-                    value= {this.state.fields.password.value}
-                    className = ""
-                    passData={this.getData}
-                    validation = {{func: stringValidation, params:{min: 1}}}
-                    error = {this.state.fields.password.error}
-                    />
-                <button className="button form__control" type='submit'>Login</button>
-            </form>
+            {loginFailMessage && <p className="message message--error">{loginFailMessage}</p>}
+            <div className="row">
+                <form className="form col-lg-5 col-md-5 col-sm-12" onSubmit={submitHandler}>
+                    {fields.map((field) => {
+                        return <Input 
+                                type={field.type}
+                                key = {field.name}
+                                name={field.name}
+                                label={field.label}
+                                value = {field.value}
+                                className = ""
+                                passData={updateField}
+                                validation = {field.validation}
+                                error = {field.error}
+                                />
+                    })}
+                    <button className="button form__control" type='submit'>Login</button>
+                </form>
             </div>
-        );
-    }
+            </div>
+    );
 }
 
-const mapStateToProps = (state : RootState) => {
-    return {
-        isLoggedIn: state.sessionReducer.isLoggedIn,
-        loginFailMessage: state.sessionReducer.errorMessage
-    }
-  }
-
-const mapDispatchToProps = (dispatch : Function) => {
-    return {
-        login: (username:string, password:string) => dispatch(sessionActions.login(username, password))
-    }
-  }
-  
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-export default connector(LoginPage);
+export default LoginPage;

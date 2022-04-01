@@ -135,8 +135,8 @@ class AccountPage extends Component<Props, any> {
                 <p className="message">    
                     Changes are not permement - data will reset after refreshing this site. 
                     </p>
-                {this.state.userUpdateSuccess && <p className="message success">Data updated successfully.</p>}
-                {this.state.userUpdateFail && <p className="message error">Data update ended with fail.</p>}
+                {this.state.userUpdateSuccess && <p className="message message--success">Data updated successfully.</p>}
+                {this.state.userUpdateFail && <p className="message message--error">Data update ended with fail.</p>}
                 <div className="row">
                     <div className="col-sm-12 col-md-4 col-lg-4">
                         <h3>Change personal data</h3>

@@ -42,7 +42,7 @@ function App(){
             </nav>
             <Routes>
                 <Route path='/' element={<LandingPage/>}/>
-                <Route path='/login' element={<LoginPage navigate={navigate}/>}/>
+                <Route path='/login' element={<LoginPage/>}/>
                 <Route path="/account" element={
                                         <PrivateRoute>
                                             <AccountPage/>

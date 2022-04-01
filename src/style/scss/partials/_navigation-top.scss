@@ -7,7 +7,7 @@
     text-align: center;
     white-space: nowrap;
 
-    @include media(tablet) {
+    @include media(md) {
         font-size: large;
         justify-content: flex-end;
     }
@@ -20,7 +20,7 @@
     padding: 0 0.5em;
    
 
-    @include media(tablet) {
+    @include media(md) {
         flex: 0;
         padding-left: 0 1.5em;
     }

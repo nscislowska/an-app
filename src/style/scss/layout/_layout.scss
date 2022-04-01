@@ -12,18 +12,17 @@ html {
 
 .page-container {
     padding: 0 $padding-page-mobile;
-    width: 100%;
 
-    @include media(tablet){
+    @include media(md){
         padding: 0 $padding-page-tablet;
     };
-    @include media(desktop){
+    @include media(lg){
         padding: 0 $padding-page-desktop;
     };
 }
 
 .content {
-    flex: 2;
+    flex: 1;
 }
 
 

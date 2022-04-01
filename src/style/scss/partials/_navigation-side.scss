@@ -3,15 +3,17 @@
     z-index: get-z-index(menu);
     transition: left 300ms;
 
+    $offset: -$grid-gap;
+
     &#{&}--hidden {
-        left: calc(-100%);
+        left: calc(-100% + $offset);
     }
     
     &#{&}--visible {
-        left: 0;
+        left: $offset;
     }
 
-    @include media(desktop){
+    @include media(lg){
         position: static;
     }
 }
@@ -24,10 +26,10 @@
     text-align: left;
     height: 100%;
 
-    @include media(tablet) {
+    @include media(md) {
     }
 
-    @include media(desktop) {
+    @include media(lg) {
         margin-top: 2em;
         margin-bottom: 2em;
         height: auto;
