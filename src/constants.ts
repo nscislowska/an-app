@@ -1,25 +1,57 @@
-export const HOME_PATH = '';
+import { NavigationItem } from "./components/Navigation";
 
-export const topLinks = {
-    // "Shop" : "/shop",
-    "Account" : HOME_PATH+"/account",
-};
-
-export const sideLinks = {
-    "Option 1" : HOME_PATH,
-    "Option 2" : HOME_PATH,
-    "Option 3" : HOME_PATH,
-};
-
-export const sideCategories ={
-    "More options 1" : {
-        "Link to nowewhere" : HOME_PATH,
-        "Another link to nowewhere" : HOME_PATH
-    },
-    "More options 2" : {
-        "Link to elsewhere" : HOME_PATH,
-        "Another link to elsewhere" : HOME_PATH
-    },
+export const NAV_LINKS : {top: NavigationItem[], side: NavigationItem[]}  = {
+    top : [
+        {
+            name: "Account",
+            path: "/account",
+        },
+        {
+            name: "Log Out",
+            path: "/logout",
+            loggedIn: true
+        }
+    ],
+    side : [
+        {
+            name: "Option 1",
+            path: '/',
+        },
+        {
+            name: "Option 2",
+            path: '/',
+        },
+        {
+            name: "Option 3",
+            path: '/',
+        },
+        {
+            name: "More options 1",
+            sub: [
+                {
+                    name: "Link to nowewhere",
+                    path: '/'
+                },
+                {
+                    name: "Another link to nowewhere",
+                    path: '/'
+                }
+            ]
+        },
+        {
+            name: "More options 2",
+            sub: [
+                {
+                    name: "Link to elsewhere",
+                    path: '/'
+                },
+                {
+                    name: "Another link to elsewhere",
+                    path: '/'
+                }
+            ]
+        }
+    ]
 }
 
 export const enum ERROR_MESSAGE {

@@ -13,13 +13,19 @@
 
 //column class generator
 @each $size, $width in $breakpoints{
-    @for $i from 1 through $grid-columns {
+    @for $i from 0 through $grid-columns {
         .col-#{$size}-#{$i}{
-            @media screen and (min-width: map-get($breakpoints, $size)){
+            @media screen and (min-width: $width){
                 margin-left: $grid-gap;
-
-                @if $i == $grid-columns{
-                    width: 100%;
+                
+                @if $i == 0{
+                    $widths: map-values($breakpoints);
+                    $width-index: index($widths, $width);
+                    $max-width: if(length($widths) > $width-index, nth($widths, $width-index+1), none);
+                    //display: none with min and max media boundary
+                    @media screen and (max-width: $max-width){
+                        display: none !important;
+                    }
                 } 
                 @else {
                     width: calc($i/$grid-columns * 100% - $grid-gap);

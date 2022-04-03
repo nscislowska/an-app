@@ -9,6 +9,7 @@ $color-brand-lighter: lighten($color-brand, 60%);
 $color-alt1-light: hsl(0,0%, 90%);
 $color-alt1: hsl(0, 0%, 85%);
 $color-alt1-dark: hsl(0, 0%, 77%);
+$color-alt1-darker: hsl(0, 0%, 50%);
 
 $color-link: lighten($color-brand, 20%);
 $color-link-active: adjust-hue($color-brand, 180deg);

@@ -7,7 +7,6 @@ import { User } from "../database/dbTypes";
 import { RootState } from "../redux/store/store";
 import { sessionActions } from "../redux/actions/sessionActions";
 import { Link } from "react-router-dom";
-import { HOME_PATH } from "../constants";
 
 const mapStateToProps = (state : RootState) => {
     return {
@@ -145,10 +144,10 @@ class AccountPage extends Component<Props, any> {
                             <button className="button form__control" type='submit'>Update</button>
                         </form>
                     </div>
-                    <div className="col-sm-12 col-md-4 col-lg-4">
+                    {/* <div className="col-sm-12 col-md-4 col-lg-4">
                         <h3>Other Actions</h3>
                         <button className="button" onClick={this.props.logout}>Log out</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

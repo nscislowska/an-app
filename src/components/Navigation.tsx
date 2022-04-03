@@ -1,74 +1,62 @@
-import { Component } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../redux/store/store";
 import Accordion from "./Accordion";
+import Button from "./Button";
 
-interface LinkList {[key : string] : string};
+export interface NavigationItem {name: string, path?: string, loggedIn? : boolean, sub?: NavigationWithLink[]};
+interface NavigationWithSub {name: string, loggedIn? : boolean, sub: NavigationWithLink[]};
+interface NavigationWithLink {name: string, path: string, loggedIn? : boolean};
 
 interface NavigationProps{
-    links : LinkList,
-    categories? : {[key : string] : LinkList},
-    navType : string,
-    className?: string,
-    isVertical : boolean;
-    isVisible? : boolean;
+    items : NavigationItem[],
+    className?: string
 }
 
-class Navigation extends Component<NavigationProps,any> {
+const initPath : string[] = [];
 
-    itemClass1 =  `nav__item ${this.props.navType}__item ${this.props.navType}__item--level1`;
-    itemClass2 = `nav__item ${this.props.navType}__item ${this.props.navType}__item--level2`;
+const Navigation = ({items, className=''}: NavigationProps) => {
+    const isLoggedIn = useSelector((state : RootState) => state.sessionReducer.isLoggedIn);
+    const [itemHistory, setitemHistory] = useState([items]);
+    const [path, setPath] = useState(initPath);
 
-    constructor(props : NavigationProps){
-        super(props);
-        this.state = {
-            
-        }
+    const navClass = className;
+    const itemClass = 'nav__item';
 
-        this.getVisibilityClass = this.getVisibilityClass.bind(this);
+    const currentItems = isLoggedIn ? itemHistory[0] : itemHistory[0].filter(item => !item.loggedIn);
+
+    const updateItemHistory = (item: NavigationWithSub, forward: boolean) => {
+        let newItemHistory = [...itemHistory];
+        let newPath = [...path];
+        forward ? newItemHistory.unshift(item.sub) : newItemHistory.shift();
+        forward ? newPath.push(item.name) : newPath.pop();
+        setitemHistory(newItemHistory);
+        setPath(newPath);
     }
 
-    getVisibilityClass(){
-        let isVisibleClass: string;
-        if (this.props.isVisible === undefined){
-            isVisibleClass = "";
-        } else{
-            if(this.props.isVisible === true){
-                isVisibleClass = `${this.props.navType}--visible`;
-            } else{
-                isVisibleClass = `${this.props.navType}--hidden`;
-            }
-        }
-
-        return isVisibleClass;
+    const NavigationLink = (item: NavigationWithLink) => {
+        return <Link key={item.name} className={itemClass} to={item.path}>{item.name}</Link>
     }
 
-    makeLinks(list : LinkList, className:string){
-        return  Object.entries(list).map(([title, ref]) => {
-            return <Link key={title} className={className} to={ref}>{title}</Link>
-        });
+    const NavigationButton = (item: NavigationWithSub, forward: boolean) => {
+        return <Button key={item.name} className={itemClass+" accordion__header"} onClick={updateItemHistory} onClickParams={[item, forward]}>
+                    {!forward ? <i className={'arrow left'}></i> : null}
+                    {item.name}
+                    {forward ? <i className={'arrow right'}></i> : null}
+                </Button>
     }
 
-
-    render(){
-        return(
-        <nav className={`nav 
-                        ${this.props.isVertical ? "nav-vertical" : 'nav-horizontal'} 
-                        ${this.props.navType} 
-                        ${this.getVisibilityClass()}
-                        ${this.props.className ? this.props.className : ""} `}>
-
-            {this.makeLinks(this.props.links, this.itemClass1)}
-
-            {this.props.categories &&
-            <Accordion headerClass={this.itemClass1} items={
-                Object.entries(this.props.categories).map(([category, linkList]) => {
-                    return {title : category, pane : this.makeLinks(linkList, this.itemClass2)}
-                })
-            }></Accordion>
-            }
+    return(
+        <nav className={navClass}>
+            {path.length > 0 ? NavigationButton({name: path.join(' / '), sub: []}, false) : null}
+            {currentItems.map((item) => {
+                return item.path ? NavigationLink(item as NavigationWithLink) :
+                        item.sub ? NavigationButton(item as NavigationWithSub, true) :
+                        null;
+            })}
         </nav>
-        );
-    }
+    );
 }
 
 

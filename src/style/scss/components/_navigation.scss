@@ -1,22 +1,39 @@
-.nav {
+@mixin nav($direction: row, $color: null, $bg-color: null, $border:null){
+    @if($bg-color) {
+        background-color: $bg-color;
+    } 
+    @if(color) {
+        color: $color;
+    }
     display: flex;
     align-items: stretch;
-
+    flex-direction: $direction;
+    
+    @if($border){
+        .nav__item ~ .nav__item{
+            @if $direction == column {
+                border-top: $border;
+            }
+            @else{
+                border-left: $border;
+            }
+            
+        }
+    }
+    
     a{
         @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
     }
+
+    *{
+        font-size: inherit;
+    }
 }
 
-.nav__item {
-    margin: 0;
-    padding: 0.7em 1em;
+.nav-vertical{
+    @include nav(column);
 }
 
-.nav-horizontal {
-    flex-direction: row;
+.nav-horizontal{
+    @include nav(row);
 }
-
-.nav-vertical {
-    flex-direction: column;
-}
-

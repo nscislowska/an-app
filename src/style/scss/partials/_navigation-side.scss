@@ -1,33 +1,56 @@
-@mixin side-nav--extractable{
+.side-nav-mobile{
+    $color: white;
+    @include nav(column, $color, $color-brand-darker, (em(3px) $color-brand solid));
+    height: 100%;
+    padding: 1em;
     position: fixed;
-    z-index: get-z-index(menu);
+    top: 0;
     transition: left 300ms;
-
-    $offset: -$grid-gap;
+    width: 100%;
+    z-index: get-z-index(menu);
 
     &#{&}--hidden {
-        left: calc(-100% + $offset);
+        left: calc(-100%);
     }
     
     &#{&}--visible {
-        left: $offset;
+        left: 0;
+    }
+
+    @include media(md){
+        width: 50%;
     }
 
     @include media(lg){
-        position: static;
+        display: none;
     }
+
+    &__item ~  &__item{
+        margin-top: em(10px);
+    }
+
+    &__close-bttn{
+        font-size: 1.5em;
+        align-self: flex-end;
+    }
+
+    i{
+        border-color: $color;
+    }
+
+    .nav__item {
+        @include button($color: inherit, $background-color: inherit, $hover-color: $color-brand, $active: false);
+        line-height: 1.7;
+        letter-spacing: 0.1em;
+    }
+
 }
 
-.side-nav {
-    $bg-color: $color-alt1-light;
-    @include side-nav--extractable();
-    background-color: $bg-color;
+.side-nav-desktop {
+    @include nav(column, black, white, (em(1px) $color-alt1-dark solid));
     padding: 0;
     text-align: left;
     height: 100%;
-
-    @include media(md) {
-    }
 
     @include media(lg) {
         margin-top: 2em;
@@ -35,13 +58,8 @@
         height: auto;
     }
 
-    &__item {
-        &--level1{
-            @include button($color: black, $background-color: $bg-color, $hover-color: white, $active: false);
-        }
-    
-        &--level2{
-            @include button($color: black, $background-color: $color-alt1-dark, $hover-color: white, $active: false);
-        }
+    .nav__item {
+        @include button($color: black, $background-color: white, $hover-color: $color-alt1-light, $active: false);
+        line-height: 1.7;
     }
 }

@@ -6,6 +6,8 @@ import { stringValidation } from "../components/validation";
 import { sessionActions } from "../redux/actions/sessionActions";
 import { RootState } from "../redux/store/store";
 
+//TO DO: loginFailMessage disappears with field error
+
 const LoginPage = () => {
 
     const initFields : {[key : string] : any}[] = [
