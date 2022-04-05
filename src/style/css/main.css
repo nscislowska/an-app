@@ -6,6 +6,10 @@ body, nav, ul, ol {
   margin: 0;
 }
 
+button {
+  padding: 0;
+}
+
 button > * {
   pointer-events: none;
 }
@@ -306,7 +310,7 @@ button > * {
 }
 
 html {
-  scroll-padding-top: 120px;
+  scroll-padding-top: 100px;
 }
 
 .App {
@@ -369,7 +373,6 @@ main a:hover {
   color: black;
   cursor: pointer;
   text-decoration: none;
-  padding: 0.3125em 0.625em;
 }
 .button:hover {
   background-color: #f2f2f2;
@@ -388,7 +391,6 @@ main a:hover {
   color: white;
   cursor: pointer;
   text-decoration: none;
-  padding: 0.3125em 0.625em;
 }
 .button--primary:hover {
   background-color: #440066;
@@ -469,6 +471,9 @@ main a:hover {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+.accordion__header i {
+  margin: 0 1em;
 }
 
 .accordion__pane {
@@ -609,11 +614,130 @@ main a:hover {
   font-size: inherit;
 }
 
+.mobile-navigation {
+  background-color: #440066;
+  color: white;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  font-size: 1.1em;
+  height: 100%;
+  left: 0;
+  padding: 1em;
+  position: fixed;
+  top: 0;
+  transition: left 600ms ease-in-out;
+  width: 100%;
+  z-index: 800;
+}
+.mobile-navigation .nav__item ~ .nav__item {
+  border-top: 0.1875em #660099 solid;
+}
+.mobile-navigation a {
+  text-decoration-line: none;
+  color: inherit;
+  display: inline-block;
+}
+.mobile-navigation a:hover {
+  text-decoration-line: none;
+}
+.mobile-navigation * {
+  font-size: inherit;
+}
+.mobile-navigation.mobile-navigation--hidden {
+  left: -100%;
+}
+@media screen and (min-width: 48em) {
+  .mobile-navigation {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 80em) {
+  .mobile-navigation {
+    display: none;
+  }
+}
+.mobile-navigation i {
+  border-color: white;
+}
+.mobile-navigation ul {
+  list-style-type: none;
+  padding: 0;
+}
+.mobile-navigation .nav__item {
+  background-color: inherit;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 4;
+  letter-spacing: 0.1em;
+}
+.mobile-navigation .nav__item:hover {
+  background-color: #660099;
+  color: white;
+  transition: background-color 300ms 0s ease;
+}
+.mobile-navigation__item ~ .mobile-navigation__item {
+  margin-top: 0.625em;
+}
+.mobile-navigation__close-bttn {
+  font-size: 1.5em;
+  align-self: flex-end;
+}
+.mobile-navigation__header {
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  flex: 0;
+}
+.mobile-navigation__close-bttn {
+  background-color: inherit;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  float: right;
+  padding: 0;
+}
+.mobile-navigation__close-bttn:hover {
+  background-color: #660099;
+  color: white;
+  transition: background-color 300ms 0s ease;
+}
+.mobile-navigation__section ~ .mobile-navigation__section {
+  margin-top: 0.625em;
+}
+.mobile-navigation__sub-navigation {
+  cursor: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 500ms ease-in-out;
+  width: 100%;
+  z-index: 810;
+}
+.mobile-navigation__sub-navigation--hidden {
+  transform: translateX(100%);
+}
+.mobile-navigation__body {
+  background-color: #440066;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.785) #440066;
+}
+.mobile-navigation__root {
+  margin-top: 1em;
+  position: relative;
+}
+
 header {
   background-color: #660099;
   color: white;
-  height: 120px;
-  line-height: 120px;
+  height: 100px;
+  line-height: 100px;
   position: sticky;
   top: 0px;
   z-index: 900;
@@ -660,76 +784,6 @@ header {
   }
 }
 
-.side-nav-mobile {
-  background-color: #440066;
-  color: white;
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-  height: 100%;
-  padding: 1em;
-  position: fixed;
-  top: 0;
-  transition: left 300ms;
-  width: 100%;
-  z-index: 800;
-}
-.side-nav-mobile .nav__item ~ .nav__item {
-  border-top: 0.1875em #660099 solid;
-}
-.side-nav-mobile a {
-  text-decoration-line: none;
-  color: inherit;
-  display: inline-block;
-}
-.side-nav-mobile a:hover {
-  text-decoration-line: none;
-}
-.side-nav-mobile * {
-  font-size: inherit;
-}
-.side-nav-mobile.side-nav-mobile--hidden {
-  left: -100%;
-}
-.side-nav-mobile.side-nav-mobile--visible {
-  left: 0;
-}
-@media screen and (min-width: 48em) {
-  .side-nav-mobile {
-    width: 50%;
-  }
-}
-@media screen and (min-width: 80em) {
-  .side-nav-mobile {
-    display: none;
-  }
-}
-.side-nav-mobile__item ~ .side-nav-mobile__item {
-  margin-top: 0.625em;
-}
-.side-nav-mobile__close-bttn {
-  font-size: 1.5em;
-  align-self: flex-end;
-}
-.side-nav-mobile i {
-  border-color: white;
-}
-.side-nav-mobile .nav__item {
-  background-color: inherit;
-  border: 0;
-  color: inherit;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 0.3125em 0.625em;
-  line-height: 1.7;
-  letter-spacing: 0.1em;
-}
-.side-nav-mobile .nav__item:hover {
-  background-color: #660099;
-  color: white;
-  transition: background-color 300ms 0s ease;
-}
-
 .side-nav-desktop {
   background-color: white;
   color: black;
@@ -767,7 +821,6 @@ header {
   color: black;
   cursor: pointer;
   text-decoration: none;
-  padding: 0.3125em 0.625em;
   line-height: 1.7;
 }
 .side-nav-desktop .nav__item:hover {
@@ -812,7 +865,6 @@ header {
   color: white;
   cursor: pointer;
   text-decoration: none;
-  padding: 0.3125em 0.625em;
   flex: 1;
   padding: 0 0.5em;
 }

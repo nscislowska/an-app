@@ -15,8 +15,8 @@ function App(){
             <PageHeader/>
             
             <div className="content page-container row">
-                <SideNavigation className="col-sm-0 col-md-0 col-lg-3"/>
-                <main className='col-sm-12 col-md-12 col-lg-9'>
+                {/* <SideNavigation className="col-sm-0 col-md-0 col-lg-3"/> */}
+                <main className='col-sm-12 col-md-12 col-lg-12'>
                 <nav className="breadcrumbs">
                         <ul>
                             <li className="crumb"><Link to='/'>Homepage</Link></li>

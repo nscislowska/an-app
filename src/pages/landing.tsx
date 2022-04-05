@@ -24,9 +24,9 @@ class LandingPage extends Component<any, any> {
             <h2 id="main-title">{welcomeMessage}</h2>  
             <span>On this page:</span>
             <ol style={{margin : '0.2em auto 0.6em'}}>
-                <li>Side menu hides for smaller viewports</li>
+                <li>Available menu for smaller viewports</li>
                 <li><HashLink to="/" elementId="ads" smooth={true}>Ads</HashLink> are switched with side buttons</li>
-                <li>Menu "options" lead to nowhere</li>
+                <li>Menu "Options" lead to nowhere</li>
             </ol>
             <span>On <i>Account</i> page you can:</span>
             <ol style={{margin : '0.2em auto 0.6em'}}>

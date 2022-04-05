@@ -15,16 +15,21 @@ $color-link: lighten($color-brand, 20%);
 $color-link-active: adjust-hue($color-brand, 180deg);
 
 //==========
-// FIXED HEIGHT
+// HEIGHT
 //==========
 
-$height-header: 120px;
+$height-header: 100px;
 
 //==========
 // PADDINGS
 //==========
 $padding-button: em(10px);
-
 $padding-page-desktop: em(120px);
 $padding-page-tablet: em(40px);
 $padding-page-mobile: em(10px);
+
+//==========
+// WIDTH
+//==========
+
+$width-scrollbar: thin;

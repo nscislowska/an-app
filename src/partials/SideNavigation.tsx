@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "../components/Navigation";
-import { NAV_LINKS } from "../constants";
+import { NAVIGATION_LINKS } from "../constants";
 import { RootState } from "../redux/store/store";
 
 interface SideNavigationProps {
@@ -10,10 +10,10 @@ interface SideNavigationProps {
 
 const SideNavigation = ({className = ''}:SideNavigationProps) => {
     const isLoggedIn = useSelector( (state : RootState) => state.sessionReducer.isLoggedIn);
-    const [items, setItems] = useState(NAV_LINKS.side);
+    const [items, setItems] = useState(NAVIGATION_LINKS);
 
     useEffect(() => {
-        setItems(isLoggedIn ? NAV_LINKS.side : NAV_LINKS.side.filter((item) => !item.loggedIn));
+        setItems(isLoggedIn ? NAVIGATION_LINKS : NAVIGATION_LINKS.filter((item) => !item.loggedIn));
     }, [isLoggedIn]);
 
     return(

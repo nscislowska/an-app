@@ -4,7 +4,6 @@
     color: $color;
     cursor: pointer;
     text-decoration: none;
-    padding: em(5px) em(10px);
 
     @if $hover-color == null{
         $hover-color: get-hover-background-color($color, $background-color, $diff: 10%);

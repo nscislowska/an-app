@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "../components/Navigation";
-import { NAV_LINKS } from "../constants";
+import { TOP_LINKS } from "../constants";
 import { RootState } from "../redux/store/store";
 
 const TopNavigation = (props : {className: string}) => {
     const isLoggedIn = useSelector( (state : RootState) => state.sessionReducer.isLoggedIn);
-    const [items, setItems] = useState(NAV_LINKS.top);
+    const [items, setItems] = useState(TOP_LINKS);
 
     useEffect(() => {
-        setItems(isLoggedIn ? NAV_LINKS.top : NAV_LINKS.top.filter((link) => !link.loggedIn));
+        setItems(isLoggedIn ? TOP_LINKS : TOP_LINKS.filter((link) => !link.loggedIn));
     }, [isLoggedIn]);
 
     return(
