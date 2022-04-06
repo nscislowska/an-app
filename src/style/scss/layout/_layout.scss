@@ -48,3 +48,23 @@ main {
     padding: 1em 0;
 }
 
+
+.top-banner{
+    display: none;
+
+    @include media(md){
+        display: block;
+        height: em($height-top-banner);
+    }
+
+    .arrow {
+        padding: 1rem;
+    }
+}
+
+p:target{
+    border: 5px solid yellow;
+    color: yellow;
+}
+
+

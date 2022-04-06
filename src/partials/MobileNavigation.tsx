@@ -24,7 +24,6 @@ const MobileSubnavigation = ({itemList, visible, title} : MobileSubnavigationPro
     const [isVisible, setVisibility] = useState(visible);
     
     useEffect(()=> {
-        console.log('visible passed down is:',visible);
         setVisibility(visible);
     },[visible]);
 
@@ -47,15 +46,15 @@ const MobileSubnavigation = ({itemList, visible, title} : MobileSubnavigationPro
 const navigationItems = (itemList : NavigationItem[]) => {
     return(
         itemList.map( item =>
-        <li key={item.name} className="nav__item">
-            {(()=>{
-                if(item.path) return NavigationLink(item as NavigationWithLink)
-                else if(item.sub){
-                    return <MobileSubnavigation itemList={item.sub} visible={false} title={item.name}/>
-                }
-                else return null;
-            })()}
-        </li>
+            <li key={"mobileNavigation_"+item.name} className="nav__item">
+                {(()=>{
+                    if(item.path) return NavigationLink(item as NavigationWithLink)
+                    else if(item.sub){
+                        return <MobileSubnavigation itemList={item.sub} visible={false} title={item.name}/>
+                    }
+                    else return null;
+                })()}
+            </li>
     ));
 }
 

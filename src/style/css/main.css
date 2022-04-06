@@ -367,6 +367,24 @@ main a:hover {
   padding: 1em 0;
 }
 
+.top-banner {
+  display: none;
+}
+@media screen and (min-width: 48em) {
+  .top-banner {
+    display: block;
+    height: 25em;
+  }
+}
+.top-banner .arrow {
+  padding: 1rem;
+}
+
+p:target {
+  border: 5px solid yellow;
+  color: yellow;
+}
+
 .button {
   background-color: #d9d9d9;
   border: 0;
@@ -405,7 +423,7 @@ main a:hover {
 
 .arrow {
   border: solid black;
-  border-width: 0 0.1875em 0.1875em 0;
+  border-width: 0 3px 0.1875em 0;
   display: inline-block;
   padding: 0.3125em;
 }
@@ -533,27 +551,50 @@ main a:hover {
 }
 
 .carousel {
+  white-space: nowrap;
+  overflow: hidden;
+  white-space: nowrap;
   width: 100%;
-  display: flex;
+  position: relative;
+}
+.carousel ol {
+  list-style: none;
+  padding-left: 0;
+  transition: transform 400ms ease-in-out;
 }
 
 .carousel__button {
-  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+  top: 0;
   flex-grow: 0;
   padding: 0.5em;
+  position: absolute;
+  width: 3rem;
+  height: 4rem;
+  margin: 7rem 1rem;
+  z-index: 50;
 }
-.carousel__display {
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  list-style-type: none;
-  padding: 0;
+.carousel__button:hover {
+  background-color: rgba(255, 255, 255, 0.681);
+  color: auto;
+  transition: background-color 300ms 0s ease;
+}
+.carousel__button--prev {
+  left: 0;
+}
+.carousel__button--next {
+  right: 0;
 }
 
-.carousel__display__item {
+.carousel__item {
   display: inline-block;
-  height: 100%;
+  height: 25em;
   width: 100%;
+  margin: 0;
 }
 
 .form {

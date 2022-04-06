@@ -1,28 +1,38 @@
-.carousel{
+.carousel {
+    white-space: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
     width: 100%;
-    display: flex;
-}
-
-.carousel__button{
-    height: 100%;
-    flex-grow: 0;
-    padding: 0.5em;
-
-    &__icon{
-        
+    position: relative;
+    ol{
+        @include list-no-style();
+        transition: transform 400ms ease-in-out;
     }
 }
 
-.carousel__display{
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    list-style-type: none;
-    padding: 0;
+.carousel__button {
+    @include button(black, rgba(255, 255, 255, 0), $hover-color: rgba(255, 255, 255, 0.681), $active: false);
+    top: 0;
+    flex-grow: 0;
+    padding: 0.5em;
+    position: absolute;
+    width: 3rem;
+    height: 4rem;
+    margin: 7rem 1rem;
+    z-index: get-z-index(text-overlay);
+
+    &--prev {
+        left: 0;
+    }
+
+    &--next {
+        right: 0;
+    }
 }
 
-.carousel__display__item{
+.carousel__item {
     display: inline-block;
-    height: 100%;
+    height: em($height-top-banner);
     width: 100%;
+    margin: 0;
 }

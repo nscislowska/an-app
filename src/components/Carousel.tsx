@@ -1,57 +1,48 @@
-import { Component } from "react";
+import { useState } from "react";
+import Button from "./Button";
 
-class Carousel  extends Component<any,any>{
-    constructor(props : any){
-        super(props);
-        this.state = {
-            items : this.buildItemList()
-        }
+interface CarouselProps {
+    children: JSX.Element[],
+    className: string,
+    id: string
+}
 
-        this.buildItemList = this.buildItemList.bind(this);
-        this.shiftForward = this.shiftForward.bind(this);
-        this.shiftBack = this.shiftBack.bind(this);
+const makeIndex = (id: string, i: number) => id+"_"+i
+
+const Carousel = ({children, className='', id} : CarouselProps) => {
+    const [offset, setOffset] = useState(0);
+    const step=100;
+    const minOffset = -step*(children.length-1);
+    const maxOffset = 0;
+
+    let items: JSX.Element[] = [];
+
+    if (children) {
+        items = children.map( (child, i) => <>
+            <li id={makeIndex(id, i)} key={makeIndex(id, i)} className="carousel__item">
+                {child}  
+            </li>
+        </>);
+    }
+    else {
+        items = [<li key={makeIndex(id, 0)} className="carousel__item">
+            <div className="image-not-found"></div>
+        </li>]
     }
 
-    buildItemList(){
-        let items = []
-        for (let i in this.props.items){
-            items.push(<li key={i} className="carousel__display__item">{this.props.items[i]}</li>)
-        }
-        return items;
-    }
-
-    shiftForward(){
-        this.setState((state : any) => {
-            let items = [];
-            for (let i=1; i<state.items.length; i++){
-                items.push(state.items[i]);
-            }
-            items.push(state.items.shift());
-            return {items : items}
-        })
-    }
-
-    shiftBack(){
-        this.setState((state : any) => {
-            let items = [];
-            for (let i=0; i<state.items.length-1; i++){
-                items.push(state.items[i]);
-            }
-            items.unshift(state.items.pop());
-            return {items : items}
-        })
-    }
-
-    render(){
-        return(
-            <div className="carousel" style={{height:'20em'}}>
-            <button className="button button--default carousel__button" onClick={this.shiftBack}><i className="arrow left"></i></button>
-            <ul className="carousel__display" >
-                {this.state.items}
-            </ul>
-            <button className="button button--default carousel__button" onClick={this.shiftForward}><i className="arrow right"></i></button>
-            </div>
-        )}
+    return(
+        <div id={id} className={'carousel '+className}>
+            {offset < maxOffset ? <Button onClick={() => { setOffset(offset + step); } }
+                    className="button button--default carousel__button carousel__button--prev" onClickParams={[]}>
+                    <i className="arrow left xl"/></Button> : null}
+            <ol style={{transform: `translateX(${offset}%)`}}>
+                {items}
+            </ol>
+            {offset > minOffset ? <Button onClick={() => { setOffset(offset - step); } }
+                    className="button button--default carousel__button carousel__button--next" onClickParams={[]}>
+                    <i className="arrow right xl"/></Button> : null}
+        </div>
+    );
 
 
 }

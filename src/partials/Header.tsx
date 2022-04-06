@@ -20,6 +20,7 @@ const PageHeader = () => {
                     </Link>
                 </div>
                 <TopNavigation className="col-sm-0  col-md-4 col-lg-8"/>
+                {/* <div className="sm-col-12">Here will be: Top navigation</div> */}
             </div>
         </header>
         

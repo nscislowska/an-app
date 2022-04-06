@@ -1,3 +1,7 @@
 AccountPage - updated sucessfully disappears when submited data is the same
 Breadcrumbs - ??!
 Database - use proper db file
+Buttons: add padding
+Navigation: redo top
+mobile Navigation: make links stretch
+slider - better buttons

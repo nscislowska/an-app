@@ -15,8 +15,10 @@ $breakpoints: (
 //z-index
 $layers: (
     header: 900,
+    menu-overlay: 850,
     menu: 800,
     tooltip: 100,
+    text-overlay: 50,
     text: 1
 );
 

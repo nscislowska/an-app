@@ -52,6 +52,11 @@
         @return $hover-bg-color
 }
 
+@mixin list-no-style(){
+    list-style: none;
+    padding-left: 0;
+}
+
 @function em($px) {
     @return math.div($px, $rem-base)+em;
 }
