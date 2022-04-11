@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/an-app/static/js/main.87da8485.js",
+    "main.js": "/an-app/static/js/main.719bc5c4.js",
     "static/js/529.2508a97f.chunk.js": "/an-app/static/js/529.2508a97f.chunk.js",
     "static/media/beach.jpg": "/an-app/static/media/beach.f24facfd795fa0ef4968.jpg",
     "static/media/pocket-watch.jpg": "/an-app/static/media/pocket-watch.ade0646468e6d407281e.jpg",
     "static/media/image-not-found.png": "/an-app/static/media/image-not-found.c4ba1e764e9cd9c83ef1.png",
     "index.html": "/an-app/index.html",
-    "main.87da8485.js.map": "/an-app/static/js/main.87da8485.js.map",
+    "main.719bc5c4.js.map": "/an-app/static/js/main.719bc5c4.js.map",
     "529.2508a97f.chunk.js.map": "/an-app/static/js/529.2508a97f.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.87da8485.js"
+    "static/js/main.719bc5c4.js"
   ]
 }
