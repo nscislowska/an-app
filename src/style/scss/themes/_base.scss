@@ -1,6 +1,7 @@
 //========
 // COLORS
 //========
+
 $color-brand: hsl(280, 100%, 30%);
 $color-brand-darker: darken($color-brand, 10%);
 $color-brand-light: lighten($color-brand, 40%);
@@ -14,17 +15,27 @@ $color-alt1-darker: hsl(0, 0%, 50%);
 $color-link: lighten($color-brand, 20%);
 $color-link-active: adjust-hue($color-brand, 180deg);
 
+$color-mobile-navigation-background: $color-brand-darker;
+$color-mobile-navigation-background-hover: $color-brand;
+$color-mobile-navigation-separator: $color-brand;
+$color-mobile-navigation-text: white;
+
 //==========
 // HEIGHT
 //==========
 
-$height-header: 100px;
+$height-mobile-navigation-header: 2em;
+
+$height-page-header: 70px;
+
 $height-top-banner: 400px;
 
 //==========
 // PADDINGS
 //==========
-$padding-button: em(10px);
+
+$padding-button: em(5px);
+
 $padding-page-desktop: em(120px);
 $padding-page-tablet: em(40px);
 $padding-page-mobile: em(10px);

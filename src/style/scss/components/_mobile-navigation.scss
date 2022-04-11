@@ -1,11 +1,8 @@
 .mobile-navigation{
     $wrapper-padding: 1em;
-    $header-height: 2em;
-    $bg-color: $color-brand-darker;
-    $width-mobile-navigation: calc(100%);
-    $color: white;
 
-    @include nav(column, $color, $color-brand-darker, (em(3px) $color-brand solid));
+    @include nav(column, $color-mobile-navigation-text, $color-mobile-navigation-background, 
+                (em(3px) $color-mobile-navigation-separator solid));
     font-size: 1.1em;
     height: 100%;
     left: 0;
@@ -29,16 +26,16 @@
     }
 
     i{
-        border-color: $color;
+        border-color: $color-mobile-navigation-text;
     }
 
     ul {
-        list-style-type: none;
-        padding: 0;
+        @include list-no-style();
     }
 
     .nav__item {
-        @include button($color: inherit, $background-color: inherit, $hover-color: $color-brand, $active: false);
+        @include button($color: $color-mobile-navigation-text, $background-color: $color-mobile-navigation-background,
+                        $hover-color: $color-brand, $active: false);
         line-height: 4;
         letter-spacing: 0.1em;
     }
@@ -48,21 +45,18 @@
     }
 
     &__close-bttn{
+        @include button($color: $color-mobile-navigation-text, $background-color: $color-mobile-navigation-background, 
+                        $hover-color: $color-mobile-navigation-background-hover, $active: false);
+        float: right;
         font-size: 1.5em;
-        align-self: flex-end;
+        padding: em(3px) em(10px);
     }
 
     &__header{
-        height: $header-height;
-        line-height: $header-height;
-        text-align: center;
         flex: 0;
-    }
-
-    &__close-bttn{
-        @include button($color: inherit, $background-color: inherit, $hover-color: $color-brand, $active: false);
-        float: right;
-        padding: 0;
+        height: $height-mobile-navigation-header;
+        line-height: $height-mobile-navigation-header;
+        text-align: center;
     }
 
     &__section ~ &__section{
@@ -84,15 +78,13 @@
     }
 
     &__body{
-        background-color: $bg-color;
+        background-color: $color-mobile-navigation-background;
         overflow-x: hidden;
         overflow-y: scroll;
         height: 100%;
         scrollbar-width: $width-scrollbar;
-        scrollbar-color: rgba(255, 255, 255, 0.785) $bg-color;
+        scrollbar-color: rgba(255, 255, 255, 0.785) $color-mobile-navigation-background;
     }
-
-    
 
     &__root{
         margin-top: 1em;

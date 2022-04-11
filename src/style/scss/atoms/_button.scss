@@ -25,8 +25,11 @@
 
 .button {
     @include button($color: black, $background-color: $color-alt1);
+    font-size: 1em;
+    padding: $padding-button;
 }
 
 .button--primary {
     @include button($color: white, $background-color: $color-brand);
+    padding:$padding-button;
 }

@@ -13,6 +13,9 @@ function App(){
       return (
         <div className="App">
             <PageHeader/>
+            <div className="page-container row">
+                <div className="col-sm-0 col-md-12 col-lg-12" style={{borderBottom: 'solid 1px black'}} >Here will be: Top navigation</div>
+            </div>
             <main className="content page-container">
                 {/* <nav className="breadcrumbs">
                         <ul>

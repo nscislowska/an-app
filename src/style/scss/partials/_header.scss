@@ -1,44 +1,59 @@
-header {
+.page-header {
     @include color($background-color: $color-brand);
-    height: $height-header;
-    line-height: $height-header;
+    height: $height-page-header;
+    font-size: em(18px);
+    // font-weight: bolder;
+    letter-spacing: em(1px);
+    line-height: $height-page-header;
     position: sticky;
     top: 0px;
     z-index: get-z-index(header);
-}
 
-.header__container {
-    align-items: stretch;
-    flex-wrap: wrap;
-
-    @include media(md) {
-        flex-wrap: nowrap;
-    }
-}
-
-.header__logo {
-    font-size: 1.5em;
-    font-weight: bolder;
-    font-family: $font-logo;
-    text-align: center;
-}
-
-.header__logo__link {
-    @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
-    height: 100%;
-}
-
-.header__hamburger {
-    color: inherit;
-    background-color: inherit;
-    border: none;
-    cursor: pointer;
-    display: block;
-    padding: 0;
-
-    @include media(lg) {
-        display: none;
+    a {
+        @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
     }
 
+    &__container {
+        align-items: stretch;
+        flex-wrap: wrap;
+    
+        @include media(md) {
+            flex-wrap: nowrap;
+        }
+    }
+
+    &__hamburger {
+        color: inherit;
+        background-color: inherit;
+        border: none;
+        cursor: pointer;
+        display: block;
+        padding: 0;
+    
+        @include media(lg) {
+            display: none;
+        }
+    
+    }
+
+    &__logo {
+        font-family: $font-logo;
+        text-align: center;
+
+        &__link {
+            @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
+            height: 100%;
+        }
+    }
+
+    &__right {
+        justify-content: flex-end;
+        display: flex;
+        flex-flow: row nowrap;
+
+        &__item {
+            padding-left: em(10px);
+        }
+    }
 }
 
