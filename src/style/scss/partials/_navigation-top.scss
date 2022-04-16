@@ -1,27 +1,37 @@
 .top-nav {
-    @include nav(row, white, $color-brand);
-    flex-wrap: wrap;
-    font-size: smaller;
-    font-weight: bold;
-    justify-content: stretch;
-    text-align: center;
-    white-space: nowrap;
+        @include nav(row, black, white, ($color-alt1 3px solid));
+        @include list-no-style();
+        align-items: stretch;
+        flex-wrap: nowrap;
+        margin: em(10px) 0;
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
 
-    @include media(md) {
-        font-size: large;
-        justify-content: flex-end;
-    }
-
-    .nav__item {
-        @include button($color: white, $background-color: $color-brand, $active: false);
+    .top-nav__item {
+        @include button($color: black, $background-color: white, $active: false);
         flex: 1;
-        padding: 0 em(5px);
-       
-    
-        @include media(md) {
-            flex: 0;
-            padding-left: 0 1.5em;
+        padding: em(15px) em(7px);
+        position: relative;
+
+        .nav__item__sub {
+            box-shadow: 1px 1px 5px black;
+            height: 0;
+            left: 0;
+            overflow: hidden;
+            opacity: 0;
+            position: absolute;
+            top: 100%;
+            transition: opacity 300ms ease-in-out;
+            width: 100%;
+            z-index: get-z-index(menu);
+        }
+
+        &:hover .nav__item__sub {
+            height: auto;
+            opacity: 1;
         }
     }
-    
 }
+
+

@@ -22,18 +22,11 @@
     }
     
     a{
-        @include link-style($color: inherit, $hover-decoration: none, $display: inline-block);
+        @include link-style($color: inherit, $hover-decoration: none);
+        // display: block;
     }
 
     *{
         font-size: inherit;
     }
-}
-
-.nav-vertical{
-    @include nav(column);
-}
-
-.nav-horizontal{
-    @include nav(row);
 }

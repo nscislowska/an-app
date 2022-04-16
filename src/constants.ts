@@ -27,6 +27,7 @@ export const NAVIGATION_LINKS : NavigationItem[] = [
     },
     {
         name: "More options 1",
+        path: '/',
         sub: [
             {
                 name: "Link to nowewhere",
@@ -40,6 +41,7 @@ export const NAVIGATION_LINKS : NavigationItem[] = [
     },
     {
         name: "More options 2",
+        path: '/',
         sub: [
             {
                 name: "Link to elsewhere",

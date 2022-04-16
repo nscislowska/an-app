@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { NavigationButton, NavigationItem, NavigationLink, NavigationWithLink, NavigationWithSub } from "../components/Navigation";
+import { NavigationButton, NavigationItem, NavigationLink } from "../components/Navigation";
 import { RootState } from "../redux/store/store";
 
 interface MobileNavigationProps{
@@ -47,13 +47,8 @@ const navigationItems = (itemList : NavigationItem[]) => {
     return(
         itemList.map( item =>
             <li key={"mobileNavigation_"+item.name} className="nav__item">
-                {(()=>{
-                    if(item.path) return NavigationLink(item as NavigationWithLink)
-                    else if(item.sub){
-                        return <MobileSubnavigation itemList={item.sub} visible={false} title={item.name}/>
-                    }
-                    else return null;
-                })()}
+                {item.sub ? <MobileSubnavigation itemList={item.sub} visible={false} title={item.name}/>
+                            : NavigationLink(item)}
             </li>
     ));
 }

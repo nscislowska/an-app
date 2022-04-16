@@ -12,19 +12,19 @@
     padding: em($size);
 
     &.down {
-      margin-top: em(-$size);
+      margin-bottom: em($size);
     }
 
     &.left {
-        margin-right: em(-$size);
+        margin-left: em($size);
     }
 
     &.right {
-        margin-left: em(-$size);
+        margin-right: em($size);
     }
 
     &.up {
-        margin-bottom: em(-$size);
+        margin-top: em($size);
     }
   }
 

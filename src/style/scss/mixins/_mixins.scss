@@ -23,10 +23,12 @@
     }
 }
 
-@mixin link-style($color: $color-link, $hover-decoration: underline, $display: inline){
+@mixin link-style($color: $color-link, $hover-decoration: underline, $display: null){
     text-decoration-line: none;
     color: $color;
-    display: $display;
+    @if $display {
+        display: $display;
+    }
     &:hover{
         text-decoration-line: $hover-decoration;
     }
@@ -55,6 +57,11 @@
 @mixin list-no-style(){
     list-style: none;
     padding-left: 0;
+
+    ul, ol {
+        list-style: none;
+        padding-left: 0;
+    }
 }
 
 @function em($px) {

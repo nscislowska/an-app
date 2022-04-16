@@ -1,6 +1,6 @@
 .mobile-navigation{
     $wrapper-padding: 1em;
-
+    @include list-no-style();
     @include nav(column, $color-mobile-navigation-text, $color-mobile-navigation-background, 
                 (em(3px) $color-mobile-navigation-separator solid));
     font-size: 1.1em;
@@ -17,20 +17,16 @@
         left: calc(-100%);
     }
 
-    @include media(md){
+    @include media(md) {
         width: 50%;
     }
 
-    @include media(lg){
+    @include media(lg) {
         display: none;
     }
 
     i{
         border-color: $color-mobile-navigation-text;
-    }
-
-    ul {
-        @include list-no-style();
     }
 
     .nav__item {

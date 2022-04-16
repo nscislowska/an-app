@@ -1,8 +1,8 @@
 .page-header {
     @include color($background-color: $color-brand);
+    box-shadow: 0 em(1px) em(10px) black;
     height: $height-page-header;
     font-size: em(18px);
-    // font-weight: bolder;
     letter-spacing: em(1px);
     line-height: $height-page-header;
     position: sticky;

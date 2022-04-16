@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/landing';
 import LoginPage from './pages/login';
 import AccountPage from './pages/account';
 import NotFoundPage from './pages/notFound';
 import PrivateRoute from './components/PrivateRoute';
-import SideNavigation from './partials/SideNavigation';
 import PageHeader from './partials/Header';
 import LogoutPage from './pages/logout';
+import TopNavigation from './partials/TopNavigation';
 
 function App(){
       return (
         <div className="App">
             <PageHeader/>
             <div className="page-container row">
-                <div className="col-sm-0 col-md-12 col-lg-12" style={{borderBottom: 'solid 1px black'}} >Here will be: Top navigation</div>
+                <TopNavigation className="col-sm-0 col-md-12 col-lg-12" />
             </div>
             <main className="content page-container">
                 {/* <nav className="breadcrumbs">
