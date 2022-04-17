@@ -852,7 +852,7 @@ p:target {
   transition: background-color 300ms 0s ease;
 }
 .top-nav .top-nav__item .nav__item__sub {
-  box-shadow: 1px 1px 5px black;
+  box-shadow: 0 0 5px black;
   height: 0;
   left: 0;
   overflow: hidden;
