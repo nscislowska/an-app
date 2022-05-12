@@ -1,4 +1,4 @@
-Project: Simple Website
+Project: simple website
 
 Language: English
 
