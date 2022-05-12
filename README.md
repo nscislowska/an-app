@@ -1,3 +1,5 @@
-# Simple React Website
+Project: Simple Website
+Language: English
+Tech: TypeScript, React + Redux, SASS
 
-This website can be viewed at https://nscislowska.github.io/an-app/#/
+<b>This website can be viewed at https://nscislowska.github.io/an-app/#/</b>
