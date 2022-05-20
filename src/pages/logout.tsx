@@ -6,9 +6,10 @@ import { sessionActions } from "../redux/actions/sessionActions";
 const LogoutPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const logout = () => sessionActions.logout(dispatch);
     
     useEffect(() => {
-        dispatch(sessionActions.logout());
+        logout();
         navigate('/');
     });
 

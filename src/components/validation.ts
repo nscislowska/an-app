@@ -1,11 +1,11 @@
 import { ERROR_MESSAGE } from "../constants";
 
 export const REGEX = {
-    email : /^\S+@\S+\.\S+$/
+    email: /^\S+@\S+\.\S+$/
 }
 
 export const REGEX_READABLE = {
-    [REGEX.email.source] : "example@domain.com"
+    [REGEX.email.source]: "example@domain.com"
 }
 
 export const stringValidation = (text: string, params:{min?: number, max?: number, pattern?: RegExp}) => {

@@ -1,15 +1,4 @@
-import { Book, User } from "./dbTypes";
-
-export let users : User[] = [
-    {
-        id : 1,
-        username : 'mylogin',
-        password : 'mypassword',
-        firstname : 'John',
-        lastname : 'Doe',
-        email : 'j.doe@gmail.com'
-    }
-]
+import { Book } from "./dbTypes";
 
 export const products : {
     books : Book[]} = {

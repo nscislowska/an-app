@@ -1,61 +1,83 @@
-import { users } from "../../database/db";
 import { User } from "../../database/dbTypes";
-import { LOGIN_FALIURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, UPDATE_USER } from "./sessionActionsTypes"
+import { users } from "../../utils/firebase";
+import { AppDispatch } from "../store/store";
+import { LOGIN_FALIURE, LOGIN_SUCCESS, LOGOUT, USER_UPDATE_FAILURE, USER_UPDATE_SUCCESS } from "./sessionActionsTypes"
 
-const loginSuccess = (user : User) => {
+interface Action{
+    type: string,
+    user?: User,
+    errorMessage?: string,
+    successMessage?: string
+}
+
+const updateSuccess = (user : User) : Action => {
+    return {
+        type: USER_UPDATE_SUCCESS,
+        user,
+        successMessage: 'Data updated sucessfully'
+    }
+}
+
+const updateFailure = (errorMessage: string) : Action => {
+    return {
+        type: USER_UPDATE_FAILURE,
+        errorMessage
+    }
+}
+
+const loginSuccess = (user : User) : Action => {
     return {
         type: LOGIN_SUCCESS,
         user
     };
 };
 
-const loginFailure = (errorMessage : string) => {
+const loginFailure = (errorMessage : string) : Action => {
     return {
         type: LOGIN_FALIURE,
-        user: null,
         errorMessage
     };
 };
 
-const loginRequest = (user : User | undefined) => {
-    return {
-        type: LOGIN_REQUEST,
-        user
-    };
-};
-
-const login = (username: string, password: string) => {
-    let action;
-    let user = users.find(user => user.username === username);
-    if (user && user.password === password){
-        localStorage.setItem("user", JSON.stringify(user));
-        action = loginSuccess(user);
-    } else {
-        action = loginFailure("Incorrect login or password.");
-    }
-    
-    return action;
-}
-
 const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("username");
     return {
-        type: LOGOUT,
-        user: null
+        type: LOGOUT
     }
 }
 
-const updateUser = (user : User) => {
-    localStorage.setItem("user", JSON.stringify(user));
-    return {
-        type: UPDATE_USER,
-        user
-    }
+const login = async (dispatch: AppDispatch, username: string, password: string) => {
+    let action = loginFailure("An errror has occured.");
+    await users.get(username).then((user : User | undefined) => {
+        if (user && user.password === password) {
+            localStorage.setItem("username", JSON.stringify(user.username));
+            action = loginSuccess(user);
+        }
+        else {
+            action = loginFailure("Incorrect login or password.");
+        }
+    }).catch((e) => {
+        action = loginFailure("An errror has occured.");
+    });
+
+    dispatch(action);
 }
 
+const updateUser = (dispatch: AppDispatch, user: User) => {
+    console.log('updating user data')
+    users.update(user)
+         .then(() => {
+            localStorage.setItem("username", JSON.stringify(user.username));
+            dispatch(updateSuccess(user));
+         })
+         .catch((e) => {
+            dispatch(updateFailure("Data update failed."));
+         });
+}
 
+export type {Action};
 export const sessionActions = {
     login,
-    logout,
+    logout : (dispatch: AppDispatch) => dispatch(logout()),
     updateUser
 };

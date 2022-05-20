@@ -1,0 +1,11 @@
+AccountPage - updated sucessfully disappears when submited data is the same
+
+Breadcrumbs - ??!
+
+Navigation: fix overflow from paage padding
+
+mobile Navigation: make links stretch
+
+slider - better buttons
+
+make content mutable by user

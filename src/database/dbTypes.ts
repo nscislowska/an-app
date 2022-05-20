@@ -1,10 +1,9 @@
-interface User {
-    id : number,
-    username : string,
+interface User{
+    username : string
     password : string,
     firstname : string,
     lastname : string,
-    email : string
+    email: string
 }
 
 interface Product {

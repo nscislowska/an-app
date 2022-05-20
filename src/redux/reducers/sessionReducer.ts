@@ -1,33 +1,46 @@
 import { User } from "../../database/dbTypes"
-import { LOGIN_FALIURE, LOGIN_SUCCESS, LOGOUT, UPDATE_USER } from "../actions/sessionActionsTypes"
+import { users } from "../../utils/firebase";
+import { Action } from "../actions/sessionActions";
+import { LOGIN_FALIURE, LOGIN_SUCCESS, LOGOUT, USER_UPDATE_FAILURE, USER_UPDATE_SUCCESS } from "../actions/sessionActionsTypes"
 
 interface sessionReducerState{
     isLoggedIn: boolean,
-    user: User | null,
-    errorMessage? : string
+    user?: User,
+    errorMessage?: string,
+    successMessage?: string
 }
 
-const getStateFromStorage = () : sessionReducerState => {   
-    let localUser = localStorage.getItem('user');
-    return{
-        isLoggedIn: localUser !== null,
-        user: localUser ? JSON.parse(localUser) as User : null
+const getStateFromStorage = async () => {   
+    let sessionUsername = localStorage.getItem('username')?.replace(/^"(.*)"$/, '$1');;
+    let user: User|undefined;
+    if (sessionUsername){
+        user = await users.get(sessionUsername);
+    }
+    return {
+        isLoggedIn: user !== undefined,
+        user
     }
 }
-const initialState = getStateFromStorage();
 
-const getState = (user: User | null) => {
+const getState = (user: User | undefined) => {
     return{
-        isLoggedIn: user !== null,
+        isLoggedIn: user !== undefined,
         user: user
     }
 }
 
-export const sessionReducer = (state : sessionReducerState = initialState, 
-                               action : {type: string, user: User | null, errorMessage?: string
-}) => {
+let initialState: sessionReducerState;
+try {
+    initialState = await getStateFromStorage();
+}
+catch(e){
+    console.log('getStateFromStorage error:', e);
+}
+
+export const sessionReducer = (state : sessionReducerState = initialState, action : Action) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
+            console.log(action.user);
             return {
                 ...getState(action.user)
             }
@@ -40,9 +53,15 @@ export const sessionReducer = (state : sessionReducerState = initialState,
             return {
                 ...getState(action.user)
             }
-        case UPDATE_USER:
+        case USER_UPDATE_SUCCESS:
             return {
-                ...getState(action.user)
+                ...getState(action.user),
+                successMessage: action.successMessage
+            }
+        case USER_UPDATE_FAILURE:
+            return {
+                ...getState(action.user),
+                errorMessage: action.errorMessage
             }
         default: return state;
     }

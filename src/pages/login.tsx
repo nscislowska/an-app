@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Input, { InputError, validateInput } from "../components/Input";
+import { FormField } from "../components/form";
+import Input, { validateInput } from "../components/Input";
 import { stringValidation } from "../components/validation";
 import { sessionActions } from "../redux/actions/sessionActions";
 import { RootState } from "../redux/store/store";
@@ -10,11 +11,22 @@ import { RootState } from "../redux/store/store";
 
 const LoginPage = () => {
 
-    const initFields : {[key : string] : any}[] = [
-        {name: "username", type: "input", value: "", error: {state: false, message: ''}, 
-            label: 'Login', validation: {func: stringValidation, params:{min: 1}}},
-        {name: "password", type: "password", value: "", error: {state: false, message: ''}, 
-        label: 'Password', validation: {func: stringValidation, params:{min: 1}}},
+    const initFields : FormField[] = [
+        {
+            name: "username", 
+            type: "input", 
+            value: "", 
+            error: undefined, 
+            label: 'Login', 
+            validation: {func: stringValidation, params:{min: 1}}},
+        {
+            name: "password", 
+            type: "password", 
+            value: "", 
+            error: undefined, 
+            label: 'Password', 
+            validation: {func: stringValidation, params:{min: 1}}
+        }
         ];
     const [fields, setFields] = useState(initFields);
     const navigate = useNavigate();
@@ -22,16 +34,14 @@ const LoginPage = () => {
     const isLoggedIn = useSelector((state : RootState) => state.sessionReducer.isLoggedIn);
     const loginFailMessage = useSelector((state : RootState) => state.sessionReducer.errorMessage);
     const dispatch = useDispatch();
-    const login = (username:string, password:string) => {
-        dispatch(sessionActions.login(username, password));
-    }
+    const login = (username: string, password: string) => sessionActions.login(dispatch, username, password);
 
     const getField = (name : string, property? : string) : any => {
         let field = fields.find((field) => field.name === name);
         return field ? (property ? field[property] : field) : null;
     }
 
-    const updateField = (fieldName: string, value: any, error: InputError) => {
+    const updateField = (fieldName: string, value: any, error: string | undefined) => {
         let index = fields.findIndex((field)=> field.name === fieldName);
         fields[index].value = value;
         fields[index].error = error;
@@ -49,7 +59,7 @@ const LoginPage = () => {
     const submitHandler = (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         validateAll();
-        let dataHasError = fields.some(field => field.error.state);
+        let dataHasError = fields.some(field => field.error);
         if(!dataHasError) {
             login(getField('username', 'value'), getField('password', 'value'));
         }
