@@ -1,66 +1,71 @@
-import { User } from "../../database/dbTypes"
-import { users } from "../../utils/firebase";
-import { Action } from "../actions/sessionActions";
+import { User } from "../../utils/dbTypes"
+import { db } from "../../utils/firebase";
+import { SesstionAction } from "../actions/sessionActions";
 import { LOGIN_FALIURE, LOGIN_SUCCESS, LOGOUT, USER_UPDATE_FAILURE, USER_UPDATE_SUCCESS } from "../actions/sessionActionsTypes"
 
 interface sessionReducerState{
     isLoggedIn: boolean,
-    user?: User,
+    user: User,
     errorMessage?: string,
     successMessage?: string
 }
 
-const getStateFromStorage = async () => {   
-    let sessionUsername = localStorage.getItem('username')?.replace(/^"(.*)"$/, '$1');;
-    let user: User|undefined;
-    if (sessionUsername){
-        user = await users.get(sessionUsername);
-    }
+const GuestUser = () : User => {
     return {
-        isLoggedIn: user !== undefined,
-        user
+        username: 'Guest_' + Math.floor(Math.random() * (99999999 - 1 + 1)) + 1,
+        password: '',
+        firstname: '',
+        lastname: '',
+        email: ''
     }
 }
 
-const getState = (user: User | undefined) => {
-    return{
+const getInitialState = async () => {   
+    let sessionUsername = localStorage.getItem('username')?.replace(/^"(.*)"$/, '$1');;
+    let user : User | undefined = sessionUsername ? await db.users.get(sessionUsername) 
+                                                  : undefined;                        
+    return {
         isLoggedIn: user !== undefined,
-        user: user
+        user: user ? user : GuestUser()
     }
 }
 
 let initialState: sessionReducerState;
 try {
-    initialState = await getStateFromStorage();
+    initialState = await getInitialState();
 }
 catch(e){
-    console.log('getStateFromStorage error:', e);
+    console.log('get inital session state error:', e);
 }
 
-export const sessionReducer = (state : sessionReducerState = initialState, action : Action) => {
+export const sessionReducer = (state : sessionReducerState = initialState, action : SesstionAction) : sessionReducerState => {
     switch (action.type) {
         case LOGIN_SUCCESS:
             console.log(action.user);
             return {
-                ...getState(action.user)
+                isLoggedIn: true,
+                user: action.user as User
             }
         case LOGIN_FALIURE:
             return {
-                ...getState(action.user),
-                errorMessage: action.errorMessage
+                isLoggedIn: false,
+                user: state.user
             }
         case LOGOUT:
             return {
-                ...getState(action.user)
+                isLoggedIn: false,
+                user: GuestUser()
             }
         case USER_UPDATE_SUCCESS:
             return {
-                ...getState(action.user),
+                isLoggedIn: state.isLoggedIn,
+                user: action.user as User,
                 successMessage: action.successMessage
             }
         case USER_UPDATE_FAILURE:
             return {
-                ...getState(action.user),
+                isLoggedIn: state.isLoggedIn,
+                user: state.user,
                 errorMessage: action.errorMessage
             }
         default: return state;

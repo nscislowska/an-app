@@ -1,6 +1,6 @@
 .top-nav {
         @include nav(row, black, white, ($color-alt1 3px solid));
-        @include list-no-style();
+        @include list-no-decoration();
         align-items: stretch;
         flex-wrap: nowrap;
         margin: em(10px) 0;

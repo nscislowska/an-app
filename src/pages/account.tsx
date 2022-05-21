@@ -1,12 +1,12 @@
 import Input from "../components/Input";
 import { REGEX, stringValidation } from "../components/validation";
 import { Form, FormField } from "../components/form";
-import { User } from "../database/dbTypes";
+import { User } from "../utils/dbTypes";
 import { RootState } from "../redux/store/store";
 import { sessionActions } from "../redux/actions/sessionActions";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { connectAdvanced, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AccountPage = () => {
 
@@ -43,27 +43,11 @@ const AccountPage = () => {
     ] as FormField[]);
     const [updateTriggered, setupdateTriggered] = useState(false);
 
-    const getData = (fieldName: any, value: any, error: string | undefined) => {
-        setFields((prevFields) => {
-            return prevFields.map((field) => {
-                    if(field.name === fieldName){
-                        field.value = value;
-                        field.error = error;
-                    }
-                    return field;
-                });
-        });
-    }
+    const passDataFromFieldToForm = Form.passDataFromFieldToForm(setFields);
 
     const submitHandler = (event : React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        let dataHasError = Form.findField(fields, 'error', undefined, false) ? true : false;
-        if(!dataHasError) {
-            if(Form.findField(fields, 'value', "")){
-                setFields(Form.validateFields(fields));
-            }
-            else{
-                let updatedUser = {...user}
+        const ok = Form.submitHandler(event, fields, setFields, (fields) => {
+            let updatedUser = {...user}
                 for (let fieldname of Object.keys(user)){
                     let field = Form.findField(fields, 'name', fieldname);
                     if (field) {
@@ -74,11 +58,37 @@ const AccountPage = () => {
                     updateUser(updatedUser);
                     setupdateTriggered(true);
                 }
-            }
-        } else{
+        });
+
+        if (ok === false) {
             setupdateTriggered(false);
         }
     }
+
+    // const submitHandler2 = (event : React.FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     let dataHasError = Form.findField(fields, 'error', undefined, false) ? true : false;
+    //     if(!dataHasError) {
+    //         if(Form.findField(fields, 'value', "")){
+    //             setFields(Form.validateFields(fields));
+    //         }
+    //         else{
+    //             let updatedUser = {...user}
+    //             for (let fieldname of Object.keys(user)){
+    //                 let field = Form.findField(fields, 'name', fieldname);
+    //                 if (field) {
+    //                     updatedUser[fieldname as keyof User] = field.value;
+    //                 }
+    //             }
+    //             if (JSON.stringify(user) !== JSON.stringify(updatedUser)){
+    //                 updateUser(updatedUser);
+    //                 setupdateTriggered(true);
+    //             }
+    //         }
+    //     } else{
+    //         setupdateTriggered(false);
+    //     }
+    // }
 
     return(
         <div>
@@ -93,13 +103,14 @@ const AccountPage = () => {
                     <h3>Change personal data</h3>
                     <form className="form" onSubmit={submitHandler}>
                         {fields.map((field) => 
-                            <Input key={field.name}
-                            type={field.type}
-                            name={field.name}
-                            label={field.label}
+                            <Input 
+                            key={field.name}
+                            type = {field.type}
+                            name = {field.name}
+                            label = {field.label}
                             value = {field.value}
                             className = ""
-                            passData={getData}
+                            passData = {passDataFromFieldToForm}
                             validation = {field.validation}
                             error = {field.error}
                             />

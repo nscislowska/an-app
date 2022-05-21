@@ -1,3 +1,9 @@
+interface ChatMessage {
+    author: string,
+    content: string,
+    timestamp: number
+}
+
 interface User{
     username : string
     password : string,
@@ -20,6 +26,7 @@ interface Book extends Product {
 }
 
 export type {
+    ChatMessage,
     User, 
     Product,
     Book

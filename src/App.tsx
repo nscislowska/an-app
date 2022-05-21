@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/landing';
 import LoginPage from './pages/login';
@@ -8,8 +8,19 @@ import PrivateRoute from './components/PrivateRoute';
 import PageHeader from './partials/Header';
 import LogoutPage from './pages/logout';
 import TopNavigation from './partials/TopNavigation';
+import { useDispatch } from 'react-redux';
+import { db } from './utils/firebase';
+import { ChatActions } from './redux/actions/chatActions';
 
 function App(){
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        const unsubscribe = db.chat.subscribe( (updatedMessages) => {
+            console.log('message-update')
+            dispatch(ChatActions.updateMessages(updatedMessages));
+        });
+    });
       return (
         <div className="App">
             <PageHeader/>

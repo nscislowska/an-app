@@ -54,7 +54,7 @@
         @return $hover-bg-color
 }
 
-@mixin list-no-style(){
+@mixin list-no-decoration() {
     list-style: none;
     padding-left: 0;
 

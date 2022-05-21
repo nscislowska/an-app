@@ -1,6 +1,6 @@
 .mobile-navigation{
     $wrapper-padding: 1em;
-    @include list-no-style();
+    @include list-no-decoration();
     @include nav(column, $color-mobile-navigation-text, $color-mobile-navigation-background, 
                 (em(3px) $color-mobile-navigation-separator solid));
     font-size: 1.1em;

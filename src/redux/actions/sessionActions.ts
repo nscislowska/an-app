@@ -1,16 +1,14 @@
-import { User } from "../../database/dbTypes";
-import { users } from "../../utils/firebase";
+import { User } from "../../utils/dbTypes";
+import { db } from "../../utils/firebase";
 import { AppDispatch } from "../store/store";
+import { Action } from "./Action";
 import { LOGIN_FALIURE, LOGIN_SUCCESS, LOGOUT, USER_UPDATE_FAILURE, USER_UPDATE_SUCCESS } from "./sessionActionsTypes"
 
-interface Action{
-    type: string,
+export interface SesstionAction extends Action{
     user?: User,
-    errorMessage?: string,
-    successMessage?: string
 }
 
-const updateSuccess = (user : User) : Action => {
+const updateSuccess = (user : User) : SesstionAction => {
     return {
         type: USER_UPDATE_SUCCESS,
         user,
@@ -18,21 +16,21 @@ const updateSuccess = (user : User) : Action => {
     }
 }
 
-const updateFailure = (errorMessage: string) : Action => {
+const updateFailure = (errorMessage: string) : SesstionAction => {
     return {
         type: USER_UPDATE_FAILURE,
         errorMessage
     }
 }
 
-const loginSuccess = (user : User) : Action => {
+const loginSuccess = (user : User) : SesstionAction => {
     return {
         type: LOGIN_SUCCESS,
         user
     };
 };
 
-const loginFailure = (errorMessage : string) : Action => {
+const loginFailure = (errorMessage : string) : SesstionAction => {
     return {
         type: LOGIN_FALIURE,
         errorMessage
@@ -48,7 +46,7 @@ const logout = () => {
 
 const login = async (dispatch: AppDispatch, username: string, password: string) => {
     let action = loginFailure("An errror has occured.");
-    await users.get(username).then((user : User | undefined) => {
+    await db.users.get(username).then((user : User | undefined) => {
         if (user && user.password === password) {
             localStorage.setItem("username", JSON.stringify(user.username));
             action = loginSuccess(user);
@@ -65,7 +63,7 @@ const login = async (dispatch: AppDispatch, username: string, password: string) 
 
 const updateUser = (dispatch: AppDispatch, user: User) => {
     console.log('updating user data')
-    users.update(user)
+    db.users.update(user)
          .then(() => {
             localStorage.setItem("username", JSON.stringify(user.username));
             dispatch(updateSuccess(user));
@@ -75,7 +73,6 @@ const updateUser = (dispatch: AppDispatch, user: User) => {
          });
 }
 
-export type {Action};
 export const sessionActions = {
     login,
     logout : (dispatch: AppDispatch) => dispatch(logout()),
